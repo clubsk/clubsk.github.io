@@ -3,26 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>clubsk.github.io</title>
+  <title>clubsk · GitHub Pages</title>
+  <meta name="description" content="clubsk 的个人/组织站点模板 — 基于 GitHub Pages 托管的轻量静态站点。" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0d6efd" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="clubsk" />
+  <meta property="og:title" content="clubsk · GitHub Pages" />
+  <meta property="og:description" content="clubsk 的个人/组织站点模板 — 基于 GitHub Pages 托管的轻量静态站点。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://clubsk.github.io/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="clubsk · GitHub Pages" />
+  <meta name="twitter:description" content="clubsk 的个人/组织站点模板" />
+
   <link rel="stylesheet" href="/styles.css">
+  <link rel="canonical" href="https://clubsk.github.io/">
 </head>
 <body>
-  <header class="site-header">
-    <h1>欢迎来到 clubsk.github.io</h1>
-    <p class="tagline">由 GitHub Pages 托管的静态站点模板</p>
+  <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    跳过到主要内容
+  </a>
+
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <h1><a href="/">clubsk</a></h1>
+      <p class="tagline">由 GitHub Pages 托管的静态站点模板</p>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="/">首页</a>
+        <a href="/README.md">说明</a>
+        <a href="/posts/">博客</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="content">
+  <main id="main" class="content" role="main">
     <section>
       <h2>关于这个站点</h2>
-      <p>这是一个最小的静态站点模板，包含 index.html、styles.css 和说明文档 README.md。你可以编辑这些文件并把内容替换为你自己的页面。</p>
+      <p>这是一个最小的静态站点模板，包含 <code>index.html</code>、<code>styles.css</code> 和说明文档 <code>README.md</code>。你可以编辑这些文件并把内容替换为你自己的页面。</p>
+    </section>
+
+    <section id="blog" aria-labelledby="blog-heading">
+      <h2 id="blog-heading">博客</h2>
+      <p>下面列出最新的博客文章（如果存在）。你可以在仓库的 <code>posts/</code> 目录中添加文章并维护一个 <code>posts/index.json</code> 用于列表。示例格式见下方说明。</p>
+
+      <!-- Blog list container -->
+      <div id="blog-list">
+        <p class="muted">正在加载文章……</p>
+        <!-- 如果浏览器禁用 JS，请显示静态提示 -->
+        <noscript>
+          <p class="muted">JavaScript 被禁用，无法显示文章列表。你可以直接访问 <a href="/posts/">/posts/</a> 查看文章。</p>
+        </noscript>
+      </div>
+
+      <details>
+        <summary>如何添加文章（示例）</summary>
+        <p>在仓库根目录下创建 <code>posts/</code> 目录，每篇文章可以作为一个单独的 HTML 或 Markdown 文件（例如 <code>posts/2026-09-03-hello.html</code>）。在 <code>posts/index.json</code> 中维护文章列表，供首页读取。示例 JSON：</p>
+        <pre>{
+  "posts": [
+    {
+      "title": "欢迎来到我的博客",
+      "date": "2026-09-03",
+      "excerpt": "这是第一篇文章的摘要。",
+      "url": "/posts/2026-09-03-hello.html"
+    },
+    {
+      "title": "第二篇文章",
+      "date": "2026-08-20",
+      "excerpt": "更多内容...",
+      "url": "/posts/2026-08-20-second.html"
+    }
+  ]
+}</pre>
+      </details>
     </section>
 
     <section>
       <h2>部署</h2>
       <ol>
         <li>确保本仓库名称为 <code>clubsk.github.io</code>（已满足）。</li>
-        <li>文件已提交到 <code>main</code> 分支的根目录，GitHub Pages 会自动发布。</li>
+        <li>文件已提交到默认分支（通常为 <code>main</code>），GitHub Pages 会自动发布。</li>
         <li>访问：<a href="https://clubsk.github.io">https://clubsk.github.io</a></li>
       </ol>
     </section>
@@ -33,8 +96,59 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© clubsk · GitHub Pages</p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© clubsk · GitHub Pages</p>
+    </div>
   </footer>
+
+  <script>
+    // 客户端加载 posts/index.json 并渲染到 #blog-list
+    async function loadPosts() {
+      const container = document.getElementById('blog-list');
+      try {
+        const res = await fetch('/posts/index.json', {cache: 'no-store'});
+        if (!res.ok) throw new Error('Fetch failed');
+        const data = await res.json();
+        const posts = data && data.posts ? data.posts : [];
+
+        if (!posts.length) {
+          container.innerHTML = '<p class="muted">暂无文章。你可以在仓库的 <code>posts/</code> 目录中添加文章。</p>';
+          return;
+        }
+
+        const ul = document.createElement('ul');
+        ul.className = 'post-list';
+        posts.forEach(post => {
+          const li = document.createElement('li');
+          li.className = 'post-item';
+          const a = document.createElement('a');
+          a.href = post.url || '#';
+          a.textContent = post.title || '(无标题)';
+
+          const meta = document.createElement('div');
+          meta.className = 'post-meta';
+          meta.textContent = post.date || '';
+
+          const excerpt = document.createElement('p');
+          excerpt.className = 'post-excerpt';
+          excerpt.textContent = post.excerpt || '';
+
+          li.appendChild(a);
+          li.appendChild(meta);
+          if (post.excerpt) li.appendChild(excerpt);
+          ul.appendChild(li);
+        });
+        container.innerHTML = '';
+        container.appendChild(ul);
+      } catch (err) {
+        console.warn('无法加载文章列表：', err);
+        container.innerHTML = '<p class="muted">无法加载文章列表（可能是 /posts/index.json 不存在）。你可以直接访问 <a href="/posts/">/posts/</a> 查看文章。</p>';
+      }
+    }
+
+    // 在 DOMContentLoaded 时加载
+    document.addEventListener('DOMContentLoaded', loadPosts);
+  </script>
 </body>
 </html>
