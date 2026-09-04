@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>404 · 页面未找到</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#6ee7b7;--muted:#94a3b8}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#071022 0%,#07152a 100%);color:#e6eef6}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:48px}
+    .card{max-width:880px;width:100%;background:rgba(255,255,255,0.03);border-radius:12px;padding:40px;box-shadow:0 6px 30px rgba(2,6,23,0.6);display:flex;gap:32px;align-items:center}
+    .number{font-size:96px;line-height:1;color:var(--accent);font-weight:700}
+    .content{flex:1}
+    h1{margin:0 0 8px 0;font-size:28px}
+    p{margin:0 0 18px 0;color:var(--muted)}
+    .actions{display:flex;gap:12px}
+    a.button{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;color:#042027;background:var(--accent);font-weight:600}
+    a.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .hint{margin-top:14px;font-size:13px;color:#98a9bf}
+    @media (max-width:720px){.card{flex-direction:column;text-align:center}.number{font-size:72px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <div class="number" aria-hidden>404</div>
+      <div class="content">
+        <h1>抱歉，我们找不到该页面</h1>
+        <p>你所请求的页面不存在、已被移除，或网址有误。别担心，你可以继续浏览我们的网站。</p>
+        <div class="actions">
+          <a class="button" href="/">返回首页</a>
+          <a class="ghost" href="https://github.com/clubsk/clubsk.github.io">查看仓库</a>
+        </div>
+        <div class="hint">提示：检查 URL 是否拼写正确，或使用网站导航查找所需内容。</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
