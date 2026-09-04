@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="zh-CN">
 <head>
@@ -55,16 +57,26 @@
 
       <!-- Blog list container -->
       <div id="blog-list">
-        <p class="muted">正在加载文章……</p>
-        <!-- 如果浏览器禁用 JS，请显示静态提示 -->
-        <noscript>
-          <p class="muted">JavaScript 被禁用，无法显示文章列表。你可以直接访问 <a href="/posts/">/posts/</a> 查看文章。</p>
-        </noscript>
-      </div>
+{% if site.posts == empty %}
+  <p class="muted">暂无文章。你可以在仓库的 <code>_posts/</code> 目录中添加文章。</p>
+{% else %}
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li class="post-item">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <div class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</div>
+        {% if post.excerpt %}
+          <p class="post-excerpt">{{ post.excerpt }}</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</div>
 
       <details>
         <summary>如何添加文章（示例）</summary>
-        <p>在仓库根目录下创建 <code>posts/</code> 目录，每篇文章可以作为一个单独的 HTML 或 Markdown 文件（例如 <code>posts/2026-09-03-hello.html</code>）。在 <cod[...]</p>
+        <p>在仓库根目录下创建 <code>posts/</code> 目录，每篇文章可以作为一个单独的 HTML 或 Markdown 文件（例如 <code>posts/2026-09-03-hello.html</code>）。在 <cod[...]
         <pre>{
   "posts": [
     {
@@ -95,7 +107,7 @@
 
     <section>
       <h2>自定义域（可选）</h2>
-      <p>如果你有域名，把域名写入仓库根的 <code>CNAME</code> 文件或在 Settings → Pages 中填写自定义域，然后在域名注册商中配置 DNS（A 记录或 CNAME）。[...]</p>
+      <p>如果你有域名，把域名写入仓库根的 <code>CNAME</code> 文件或在 Settings → Pages 中填写自定义域，然后在域名注册商中配置 DNS（A 记录或 CNAME）。[...]
     </section>
   </main>
 
@@ -109,6 +121,8 @@
     // 客户端加载 posts/index.json 并渲染到 #blog-list
     async function loadPosts() {
       const container = document.getElementById('blog-list');
+      // 如果 Jekyll 已经渲染文章列表，就不要覆盖静态内容
+      if (container.querySelector('.post-list')) return;
       try {
         const res = await fetch('/posts/index.json', {cache: 'no-store'});
         if (!res.ok) throw new Error('Fetch failed');
