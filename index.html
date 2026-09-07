@@ -27,6 +27,11 @@
 
   <link rel="stylesheet" href="/styles.css">
   <link rel="canonical" href="https://clubsk.github.io/">
+  <style>
+    /* 主页折叠文章内容的最小样式 */
+    .post-content{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(16,24,40,0.04)}
+    .post-toggle{cursor:pointer}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">
@@ -52,7 +57,7 @@
 
     <section id="blog" aria-labelledby="blog-heading">
       <h2 id="blog-heading">博客</h2>
-      <p>这是我的博客</p>
+      <p>这是我的博客（主页仅显示标题与日期，点击标题展开文章内容）</p>
 
       <!-- Blog list container -->
       <div id="blog-list">
@@ -62,11 +67,9 @@
   <ul class="post-list">
     {% for post in site.posts %}
       <li class="post-item">
-        <a href="{{ post.url }}">{{ post.title }}</a>
+        <a class="post-toggle" href="{{ post.url }}" data-url="{{ post.url }}" aria-expanded="false">{{ post.title }}</a>
         <div class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</div>
-        {% if post.excerpt %}
-          <p class="post-excerpt">{{ post.excerpt }}</p>
-        {% endif %}
+        <div class="post-content" hidden aria-hidden="true"></div>
       </li>
     {% endfor %}
   </ul>
@@ -80,11 +83,77 @@
   </footer>
 
   <script>
-    // 客户端加载 posts/index.json 并渲染到 #blog-list
-    async function loadPosts() {
+    // 客户端加载 posts/index.json 并渲染到 #blog-list（保持原有逻辑），并支持点击标题展开文章内容
+    async function fetchPostContent(url){
+      try{
+        const res = await fetch(url, {cache: 'no-store'});
+        if(!res.ok) throw new Error('Fetch failed: ' + res.status);
+        const text = await res.text();
+        // 尝试解析 HTML，提取 article 或 main 中的主体内容
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        // 常见文章容器
+        let contentEl = doc.querySelector('article');
+        if(!contentEl) contentEl = doc.querySelector('main') || doc.querySelector('#main');
+        // 提取 innerHTML 或整个 body 作为后备
+        const html = contentEl ? contentEl.innerHTML : doc.body.innerHTML;
+        return html;
+      }catch(err){
+        console.warn('无法加载文章内容：', err);
+        return '<p class="muted">无法加载文章内容。你可以点击标题跳转到文章页面查看。</p>';
+      }
+    }
+
+    async function togglePost(e, linkEl, contentContainer){
+      e.preventDefault();
+      const expanded = linkEl.getAttribute('aria-expanded') === 'true';
+      if(expanded){
+        // 隐藏
+        contentContainer.hidden = true;
+        contentContainer.setAttribute('aria-hidden', 'true');
+        linkEl.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      // 展开：如果已加载，则直接显示
+      if(contentContainer.dataset.loaded === 'true'){
+        contentContainer.hidden = false;
+        contentContainer.setAttribute('aria-hidden', 'false');
+        linkEl.setAttribute('aria-expanded', 'true');
+        return;
+      }
+      // 否则 fetch 并插入内容
+      const url = linkEl.dataset.url || linkEl.href;
+      const loading = document.createElement('p');
+      loading.className = 'muted';
+      loading.textContent = '正在加载文章内容...';
+      contentContainer.innerHTML = '';
+      contentContainer.appendChild(loading);
+      contentContainer.hidden = false;
+      contentContainer.setAttribute('aria-hidden', 'false');
+      linkEl.setAttribute('aria-expanded', 'true');
+
+      const html = await fetchPostContent(url);
+      // 将服务器返回的 HTML 插入（这里信任仓库内页面）
+      contentContainer.innerHTML = html;
+      contentContainer.dataset.loaded = 'true';
+    }
+
+    async function loadPosts(){
       const container = document.getElementById('blog-list');
       // 如果 Jekyll 已经渲染文章列表，就不要覆盖静态内容
-      if (container.querySelector('.post-list')) return;
+      if (container.querySelector('.post-list')) {
+        // 为每个链接绑定点击展开事件（服务器渲染的列表）
+        container.querySelectorAll('.post-toggle').forEach(link => {
+          const li = link.closest('.post-item');
+          const contentContainer = li.querySelector('.post-content');
+          link.addEventListener('click', (e)=> togglePost(e, link, contentContainer));
+          // 支持键盘回车展开
+          link.addEventListener('keydown', (e)=>{
+            if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePost(e, link, contentContainer); }
+          });
+        });
+        return;
+      }
       try {
         const res = await fetch('/posts/index.json', {cache: 'no-store'});
         if (!res.ok) throw new Error('Fetch failed');
@@ -102,20 +171,27 @@
           const li = document.createElement('li');
           li.className = 'post-item';
           const a = document.createElement('a');
+          a.className = 'post-toggle';
           a.href = post.url || '#';
+          a.dataset.url = post.url || '#';
+          a.setAttribute('aria-expanded', 'false');
           a.textContent = post.title || '(无标题)';
 
           const meta = document.createElement('div');
           meta.className = 'post-meta';
           meta.textContent = post.date || '';
 
-          const excerpt = document.createElement('p');
-          excerpt.className = 'post-excerpt';
-          excerpt.textContent = post.excerpt || '';
+          const content = document.createElement('div');
+          content.className = 'post-content';
+          content.hidden = true;
+          content.setAttribute('aria-hidden', 'true');
+
+          a.addEventListener('click', (e)=> togglePost(e, a, content));
+          a.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePost(e, a, content); } });
 
           li.appendChild(a);
           li.appendChild(meta);
-          if (post.excerpt) li.appendChild(excerpt);
+          li.appendChild(content);
           ul.appendChild(li);
         });
         container.innerHTML = '';
