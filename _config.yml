@@ -1,0 +1,17 @@
+remote_theme: "daattali/beautiful-jekyll"
+plugins:
+  - jekyll-remote-theme
+
+title: "ClubSK 博客"
+email: ""
+description: "个人博客 — ClubSK"
+baseurl: ""
+url: "https://clubsk.github.io"
+markdown: kramdown
+permalink: /:categories/:title.html
+paginate: 5
+
+# 说明：
+# - 该配置使用 Beautiful Jekyll 作为远程主题（daattali/beautiful-jekyll）
+# - 我保留了仓库中现有的 _layouts 与 index.html，采用保守策略以免覆盖你当前自定义内容。
+# - 若你希望使用主题默认布局并替换现有首页，请回复让我替换 index.html 和相关布局（我会先备份）。
