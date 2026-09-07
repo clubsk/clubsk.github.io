@@ -48,6 +48,12 @@ body{
 .content{max-width:920px;margin:28px auto;padding:0 16px}
 .content h2{color:var(--accent-solid);margin-top:0}
 
+/* 文章标题（设置为稳重深色） */
+article h1, .post-title, .article-title {
+  color: var(--accent-solid);
+  margin-top: 0;
+}
+
 /* 卡片：白色 + 轻微阴影 */
 section{
   background: var(--card);
