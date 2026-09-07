@@ -9,13 +9,19 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
-      <h1><a href="/">{{ site.title | default: "clubsk" }}</a></h1>
-      <p class="tagline">{{ site.tagline | default: "My blog" }}</p>
-      <nav class="site-nav" aria-label="主导航">
-        <a href="/">首页</a>
-        <a href="/posts/">博客</a>
-      </nav>
+    <div class="wrap header-top">
+      <div class="site-avatar">
+        <!-- 头像文件（请上传到 /assets/images/avatar.png） -->
+        <img src="/assets/images/avatar.png" alt="{{ site.title | default: 'clubsk' }} avatar" class="avatar-img" />
+      </div>
+      <div class="site-title">
+        <h1><a href="/">{{ site.title | default: "clubsk" }}</a></h1>
+        <p class="tagline">{{ site.tagline | default: "My blog" }}</p>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="/">首页</a>
+          <a href="/posts/">博客</a>
+        </nav>
+      </div>
     </div>
   </header>
 
