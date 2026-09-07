@@ -1,0 +1,58 @@
+---
+layout: default
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title }} · {{ site.title | default: "clubsk" }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | default: site.description }}" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* 文章页加强样式 */
+    .post { max-width: 880px; margin: 28px auto; padding: 0 16px; }
+    .post-header{margin-bottom:18px}
+    .post-title{font-size:2rem;margin:0 0 6px 0;color:var(--accent-solid)}
+    .post-meta{color:var(--muted);font-size:0.95rem}
+    .post-body img{max-width:100%;height:auto;display:block;margin:12px 0}
+    .post-body pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto}
+    .post-body code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace}
+    .back-link{display:inline-block;margin-top:18px;color:var(--accent-solid);text-decoration:none}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <h1><a href="/">{{ site.title | default: "clubsk" }}</a></h1>
+      {% if site.tagline %}<p class="tagline">{{ site.tagline }}</p>{% endif %}
+      <nav class="site-nav" aria-label="主导航">
+        <a href="/">首页</a>
+        <a href="/posts/">博客</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="content post" role="main">
+    <article class="post-article">
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">{{ page.date | date: "%Y-%m-%d" }}{% if page.tags %} · 标签：{% for t in page.tags %}<span class="tag">{{ t }}</span>{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}</div>
+      </header>
+
+      <div class="post-body">
+        {{ content }}
+      </div>
+
+      <p><a class="back-link" href="/">← 返回首页</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <p>© {{ site.title | default: "clubsk" }} · GitHub Pages</p>
+    </div>
+  </footer>
+</body>
+</html>
