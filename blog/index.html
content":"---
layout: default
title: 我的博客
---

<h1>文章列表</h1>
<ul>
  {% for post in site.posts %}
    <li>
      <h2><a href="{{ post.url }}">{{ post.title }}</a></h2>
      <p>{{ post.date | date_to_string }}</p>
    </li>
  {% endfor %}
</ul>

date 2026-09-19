@@ -1,0 +1,135 @@
+/* styles.css — 纯白主题（简洁 / 极简 / 纯白风格）*/
+:root{
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #0f1724; /* 深色主文本 */
+  --muted: #6b7280; /* 次要文本 */
+  --radius: 12px;
+
+  /* 纯白风格不使用彩色渐变，保留低对比度中性色作为点缀 */
+  --accent-solid: #0f1724;
+  --glass: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Inter", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+/* 容器 */
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* 头部：纯白、低阴影 */
+.site-header{
+  background:var(--card);
+  color:var(--text);
+  padding:48px 16px;
+  text-align:center;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:20px;
+  box-shadow:0 6px 20px rgba(16,24,40,0.04);
+}
+.site-header h1{margin:0;font-size:2rem;letter-spacing:0.4px}
+.site-header .tagline{opacity:0.95;margin-top:8px;font-weight:500}
+.site-nav{margin-top:12px}
+.site-nav a{
+  color:var(--text);
+  margin:0 10px;text-decoration:none;font-weight:600;
+  padding:6px 10px;border-radius:8px;transition:transform .12s,opacity .12s;
+  border:1px solid rgba(16,24,40,0.04);
+  background:transparent;
+}
+.site-nav a:hover{transform:translateY(-2px);opacity:0.95}
+
+/* 主要内容 */
+.content{max-width:920px;margin:28px auto;padding:0 16px}
+.content h2{color:var(--accent-solid);margin-top:0}
+
+/* 文章标题（设置为稳重深色） */
+article h1, .post-title, .article-title {
+  color: var(--accent-solid);
+  margin-top: 0;
+}
+
+/* 卡片：白色 + 轻微阴影 */
+section{
+  background: var(--card);
+  padding:22px;border-radius:var(--radius);
+  margin-bottom:18px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  border-left:4px solid rgba(16,24,40,0.02);
+  transition:transform .12s,box-shadow .12s;
+}
+section:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(16,24,40,0.06);
+  border-left-color:rgba(16,24,40,0.04);
+}
+
+/* 代码块与展示 */
+.code{background:#f8f9fb;padding:10px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace}
+.muted{color:var(--muted)}
+
+/* 博客列表风格 */
+.post-list{list-style:none;padding:0;margin:0}
+.post-item{
+  display:flex;flex-direction:column;padding:12px 0;border-bottom:1px dashed rgba(16,24,40,0.04);
+}
+.post-item a{
+  color:var(--accent-solid);font-weight:700;font-size:1.03rem;text-decoration:none;
+}
+.post-meta{color:var(--muted);font-size:0.88rem;margin-top:6px}
+.post-excerpt{margin:8px 0 0;color:#374151}
+
+/* 中性色小标签 */
+.tag{
+  display:inline-block;padding:6px 10px;border-radius:999px;font-size:0.8rem;color:var(--text);margin-right:8px;
+  background:#f1f5f9;
+  border:1px solid rgba(16,24,40,0.04);
+}
+
+/* 页脚 */
+.site-footer{
+  text-align:center;padding:22px;color:var(--muted);
+  border-top:1px solid rgba(16,24,40,0.03);
+}
+
+/* 链接与按钮 */
+a{color:var(--accent-solid)}
+.button{
+  display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent-solid);color:white;text-decoration:none;font-weight:600;
+  box-shadow:0 6px 18px rgba(2,6,23,0.12);transition:transform .12s,box-shadow .12s;
+}
+.button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(2,6,23,0.16)}
+
+/* 小屏适配 */
+@media (max-width:720px){
+  .site-header{padding:36px 12px;border-radius:0 0 16px 16px}
+  .site-header h1{font-size:1.5rem}
+  .site-nav{display:block;margin-top:8px}
+}
+
+
+/* avatar 样式 — 追加：将外部图片在浏览器中顺时针旋转 90deg 并裁成圆形 */
+.site-header .header-top{ display:flex; align-items:center; gap:18px; justify-content:center; flex-wrap:wrap; }
+.site-avatar{ width:120px; height:120px; flex:0 0 120px; display:block; border-radius:50%; overflow:hidden; }
+.avatar-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  aspect-ratio:1/1;
+  display:block;
+  border-radius:50%;
+}
+
+/* 小屏适配与响应式头像尺寸 */
+@media (max-width:720px){
+  .site-avatar{ width:64px; height:64px; flex:0 0 64px; }
+  .site-header .header-top{ padding:12px 8px; }
+}
+
+/* 调整站点标题在头像旁边显示 */
+.site-title{ text-align:left; display:flex; flex-direction:column; gap:6px; align-items:flex-start; }

@@ -1,0 +1,80 @@
+---
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>clubsk · GitHub Pages</title>
+  <meta name="description" content="clubsk 的个人/组织站点模板 — 基于 GitHub Pages 托管的轻量静态站点。" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#0d6efd" />
+
+  <!-- 引入 Google Fonts: Inter (英文) + Noto Sans SC (中文) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="canonical" href="https://clubsk.github.io/">
+  <style>
+    .post-toggle{cursor:pointer}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    跳过到主要内容
+  </a>
+
+  <header class="site-header" role="banner">
+    <div class="wrap" style=display:flex;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <div class="site-avatar" style="display:inline-block;vertical-align:middle;margin-right:12px;">
+        <img src="/assets/20200514115600_uaypl.png" alt="clubsk avatar" class="avatar-img" style="width:100px;height:100px;border-radius:50%;object-fit:cover;">
+      </div>
+      <div style="display:inline-block;vertical-align:middle;">
+        <h1><a href="/">clubsk</a></h1>
+        <p class="tagline">等我们学会飞，飞越黑夜和考验，日子就要从孤单里毕业</p>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="/">首页</a>
+          <a href="/blog/">博客</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="content" role="main">
+    <section>
+      <h2>关于这个站点</h2>
+      <p>用于记录计算机以及网络安全学习历程，并对所学知识进行总结</p>
+    </section>
+
+    <section id="blog" aria-labelledby="blog-heading">
+      <h2 id="blog-heading">博客</h2>
+      <p>这是我的博客（主页仅显示标题与日期，点击标题将跳转到文章页面阅读）</p>
+
+      <!-- Blog list container -->
+      <div id="blog-list">
+{% if site.posts == empty %}
+  <p class="muted">暂无文章。你可以在仓库的 <code>_posts/</code> 目录中添加文章。</p>
+{% else %}
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li class="post-item">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <div class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</div>
+
+  </main>
+  
+  <script>
+    // 如果 Jekyll 未渲染文章列表，给出稳定的回退入口，避免访问不存在的 /posts/index.json
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.getElementById('blog-list');
+      if (!container || container.querySelector('.post-list')) return;
+      container.innerHTML = '<p class="muted">文章列表由 Jekyll 生成，完整内容请访问 <a href="/blog/">博客页面</a>。</p>';
+    });
+  </script>
+</body>
+</html>
