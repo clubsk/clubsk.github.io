@@ -1,0 +1,7 @@
+- name: 菜鸟教程
+  url: https://www.runoob.com
+  desc: 查语法用
+
+- name: FreeBuf
+  url: https://www.freebuf.com
+  desc: 网络安全行业
