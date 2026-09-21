@@ -1,11 +1,11 @@
 - name: 菜鸟教程
-  url: https://www.runoob.com
+  url:  https://www.runoob.com
   desc: 查语法用
 
 - name: 树上的乌龟
-  url: 3a0.top
+  url:  3a0.top
   desc: 学长
 
 - name: 博客园
-  url: https://www.cnblogs.com/laov/p/3409875.html
+  url:  https://www.cnblogs.com/laov/p/3409875.html
   desc: linux基础
