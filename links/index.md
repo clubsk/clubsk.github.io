@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 友链
+title: 链接
 permalink: /links/
 ---
 
