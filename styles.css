@@ -130,3 +130,21 @@ a{color:var(--accent-solid)}
 
 /* 调整站点标题在头像旁边显示 */
 .site-title{ text-align:left; display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+
+/* ====== 自定义引用块样式 ====== */
+blockquote {
+    position: relative;
+    margin: 1.5em 0 !important;
+    padding: 1em 1em 1em 2.2em !important;
+    background-color: var(--block-background) !important; /* 使用主题自带的背景变量，保持暗色/亮色统一 */
+    border-left: 4px solid var(--accent-solid) !important; /* 左侧竖线颜色跟随主题主色调 */
+    border-radius: 0 8px 8px 0 !important;
+    color: var(--text-color) !important; /* 使用主题文字颜色 */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* 鼠标悬浮时的微互动效果 */
+blockquote:hover {
+    transform: translateX(5px);
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.05);
+}
