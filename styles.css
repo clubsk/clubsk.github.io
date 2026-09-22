@@ -222,3 +222,25 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
     font-weight: normal;
 }
+
+/* ==================================
+   【最终版】全站字体统一设置为霞鹜文楷
+   ================================== */
+
+/* 给整个网页设定基础字体，所有元素自动继承 */
+body {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif !important;
+    /* 稍微增加一点行距，阅读体验更好 */
+    line-height: 1.7 !important;
+}
+
+/* 确保所有标题（包括首页的站点名、栏目名）都用这个字体，且不加粗 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif !important;
+    font-weight: normal !important;
+}
+
+/* 确保文章标题、摘要、日期等元素也使用这个字体 */
+h3.post-title, h2.post-title, p, a, span, li, small {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif !important;
+}
