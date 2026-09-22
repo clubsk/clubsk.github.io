@@ -244,3 +244,16 @@ h1, h2, h3, h4, h5, h6 {
 h3.post-title, h2.post-title, p, a, span, li, small {
     font-family: "LXGW WenKai", "KaiTi", "楷体", serif !important;
 }
+
+/* ==================================
+   去掉首页 Logo 和导航链接的下划线
+   ================================== */
+a {
+    text-decoration: none !important;
+    border-bottom: none !important; /* 针对某些用边框模拟下划线的特殊写法 */
+}
+
+/* 保留鼠标悬停时的变色效果，提升用户体验 */
+a:hover {
+    color: #000; 
+}
