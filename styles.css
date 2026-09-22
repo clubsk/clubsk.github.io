@@ -131,20 +131,28 @@ a{color:var(--accent-solid)}
 /* 调整站点标题在头像旁边显示 */
 .site-title{ text-align:left; display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
 
-/* ====== 自定义引用块样式 ====== */
+/* ====== 自定义引用块样式（淡粉色主题） ====== */
 blockquote {
     position: relative;
     margin: 1.5em 0 !important;
-    padding: 1em 1em 1em 2.2em !important;
-    background-color: var(--block-background) !important; /* 使用主题自带的背景变量，保持暗色/亮色统一 */
-    border-left: 4px solid var(--accent-solid) !important; /* 左侧竖线颜色跟随主题主色调 */
-    border-radius: 0 8px 8px 0 !important;
-    color: var(--text-color) !important; /* 使用主题文字颜色 */
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 1.2em 1.5em !important;
+    
+    /* 极淡的粉色背景，护眼且通透 */
+    background-color: #FDF2F8 !important; 
+    
+    /* 柔和的浅粉色左侧竖线，起到强调作用 */
+    border-left: 5px solid #F9A8D4 !important; 
+    
+    /* 稍微大一点的圆角，显得更圆润可爱 */
+    border-radius: 0 8px 8px 0 !important; 
+    
+    /* 字体颜色跟随主题原有设定，防止看不清 */
+    color: var(--text) !important; 
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* 鼠标悬浮时的微互动效果 */
 blockquote:hover {
     transform: translateX(5px);
-    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 3px 5px 15px rgba(249, 168, 212, 0.15); /* 悬浮时带有一抹淡淡的粉光 */
 }
