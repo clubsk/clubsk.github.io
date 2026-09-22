@@ -134,20 +134,17 @@ a{color:var(--accent-solid)}
 /* 1. 引用块样式（紧凑内敛版） */
 blockquote {
     position: relative;
-    /* 缩小上下间距，让它更贴近前后文字 */
-    margin: 0.5em 0 !important; 
-    /* 将左侧竖线向右移动，让它紧贴文字边缘 */
-    padding: 0.6em 0.8em 0.6em 1.2em !important; 
-    background-color: #FDF2F8 !important;
-    /* 把竖线调细一点，视觉更清爽 */
-    border-left: 3px solid #F9A8D4 !important; 
-    border-radius: 0 4px 4px 0 !important;
+    margin: 0.5em 0 !important;
+    padding: 0.6em 0.8em 0.6em 1.2em !important;
+    background-color: #f9f9f9 !important; /* 替换了极浅的灰色背景 */
+    border-left: 3px solid #cccccc !important; /* 替换了深灰色边框 */
+    border-radius: 8px !important; /* 替换成了带圆角的 */
     color: var(--text) !important;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 blockquote:hover {
     transform: translateX(5px);
-    box-shadow: 3px 5px 15px rgba(249, 168, 212, 0.15);
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.05); /* 替换了粉色的阴影，变成极淡的黑影 */
 }
 
 /* 鼠标悬浮时的微互动效果 */
