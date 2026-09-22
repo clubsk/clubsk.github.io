@@ -156,3 +156,50 @@ blockquote:hover {
     transform: translateX(5px);
     box-shadow: 3px 5px 15px rgba(249, 168, 212, 0.15); /* 悬浮时带有一抹淡淡的粉光 */
 }
+
+/* ==========================================
+   自定义 标题 与 列表 样式 
+   ========================================== */
+
+/* 统一设置所有标题的下边距和加粗 */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.8em !important;
+    margin-bottom: 0.8em !important;
+    font-weight: bold !important;
+    color: var(--text) !important;
+}
+
+/* 一级标题样式 */
+h1 {
+    font-size: 2.2em !important;
+    border-bottom: 2px solid #f3f4f6 !important;
+    padding-bottom: 0.3em !important;
+}
+
+/* 二级标题样式 */
+h2 {
+    font-size: 1.75em !important;
+}
+
+/* 三级标题样式 */
+h3 {
+    font-size: 1.35em !important;
+}
+
+/* 无序列表（小圆点列表）样式 */
+ul {
+    padding-left: 2.2em !important; /* 左侧缩进，让它不要顶格 */
+    margin-bottom: 1.2em !important;
+}
+
+li {
+    margin-bottom: 0.5em !important;
+    line-height: 1.6 !important;
+    list-style-type: circle !important; /* 使用空心小圆点 */
+}
+
+/* 嵌套列表的二级缩进（让层级更明显） */
+li > ul {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
