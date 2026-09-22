@@ -211,3 +211,17 @@ pre, code {
 .highlight pre {
   overflow-x: auto !important; /* 如果代码太长，允许左右滑动，防止溢出 */
 }
+
+/* ========== 霞鹜文楷字体设置 ========== */
+
+/* 正文 */
+body, p, li, blockquote {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+    line-height: 1.8;
+}
+
+/* 标题 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+    font-weight: normal;
+}
