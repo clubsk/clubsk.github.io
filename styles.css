@@ -202,3 +202,12 @@ li > ul {
     margin-top: 0.5em !important;
     margin-bottom: 0.5em !important;
 }
+
+/* 4. 代码块样式（解决内部文字向右偏、不整齐的问题） */
+pre, code {
+  padding-left: 0.2em !important; /* 将左内边距缩减到极小，让代码文字完全顶格对齐 */
+}
+
+.highlight pre {
+  overflow-x: auto !important; /* 如果代码太长，允许左右滑动，防止溢出 */
+}
