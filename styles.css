@@ -163,18 +163,17 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.8em !important;
     font-weight: bold !important;
     color: var(--text) !important;
-    text-align: left !important; /* 强制所有标题靠左 */
-    margin-left: 0 !important;   /* 清除所有标题的左边距 */
-    padding-left: 0 !important;  /* 清除所有标题的左内边距 */
+    text-align: left !important; /* 强制靠左对齐 */
+    margin-left: 0 !important;   /* 彻底消除左边距 */
+    padding-left: 0 !important;  /* 彻底消除左内边距 */
+    text-indent: 0 !important;   /* 消除首行缩进 */
 }
 
-/* 一级标题样式 */
+/* 一级标题特殊样式 */
 h1 {
     font-size: 2.2em !important;
     border-bottom: 2px solid #f3f4f6 !important;
     padding-bottom: 0.3em !important;
-    margin-left: 0 !important;
-    padding-left: 0 !importa
 }
 
 
