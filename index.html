@@ -30,7 +30,7 @@
         <img src="/assets/20200514115600_uaypl.png" alt="clubsk avatar" class="avatar-img" style="width:100px;height:100px;border-radius:50%;object-fit:cover;">
       </div>
       <div style="display:inline-block;vertical-align:middle;">
-        <h1><a href="/">clu b s k</a></h1>
+        <h1><a href="/">c l u b s k</a></h1>
         <p class="tagline">等我们学会飞，飞越黑夜和考验，日子就要从孤单里毕业</p>
         <nav class="site-nav" aria-label="主导航">
           <a href="/">首页</a>
@@ -87,6 +87,95 @@
 </div>
 
   </main>
+  <!-- 歌词入场动画 -->
+<div id="intro-overlay">
+    <span id="intro-text"></span>
+</div>
+
+<style>
+/* 容器：全屏固定 */
+#intro-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    /* 核心改动：雨后清晨的灰蓝渐变，模拟湿润的空气感 */
+    background: linear-gradient(135deg, #7a8b99 0%, #aebbc4 100%);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 氛围层：模拟雾气流动的效果 */
+#intro-overlay::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    /* 半透明的白色云雾 */
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+    opacity: 0.6;
+    filter: blur(30px); /* 强模糊制造朦胧感 */
+    animation: mistFlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes mistFlow {
+    from { transform: translate(-10%, -10%) scale(1); }
+    to { transform: translate(10%, 10%) scale(1.1); }
+}
+
+/* 文字样式：文艺、呼吸感 */
+#intro-text {
+    color: #fdfbf7; /* 暖调晨曦白，比纯白更温柔 */
+    font-size: 20px; /* 稍微缩小字号，更精致 */
+    font-family: "Songti SC", "SimSun", serif; /* 宋体/衬线体，更有文学感 */
+    letter-spacing: 4px; /* 加大字间距，营造慵懒感 */
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1); /* 淡淡的阴影增加层次 */
+    line-height: 1.8;
+    text-align: center;
+    padding: 0 20px;
+}
+</style>
+
+<script>
+(function() {
+    // 歌词内容，用空格或换行控制节奏
+    var text = "窗外的雨刚刚停\n午后气息 浓浓地才散去\n迷迷糊糊张开眼\n刚刚的梦 我似乎\n在瞬间看见你";
+    
+    var el = document.getElementById('intro-text');
+    var i = 0;
+
+    function typeWriter() {
+        if (i < text.length) {
+            // 处理换行符
+            if (text.charAt(i) === '\n') {
+                el.innerHTML += '<br>';
+            } else {
+                el.textContent += text.charAt(i);
+            }
+            i++;
+            // 打字速度：120ms，稍微快一点点，配合呼吸感
+            setTimeout(typeWriter, 120);
+        } else {
+            // 打完字后停留时间：1.5秒，让人读完最后一句
+            setTimeout(function() {
+                var overlay = document.getElementById('intro-overlay');
+                overlay.style.transition = 'opacity 1.2s ease'; /* 淡出时间变长，更柔和 */
+                overlay.style.opacity = '0';
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                }, 1200);
+            }, 1500);
+        }
+    }
+
+    window.addEventListener('load', function() {
+        setTimeout(typeWriter, 500);
+    });
+})();
+</script>
 
   
 </body>
