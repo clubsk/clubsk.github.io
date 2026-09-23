@@ -353,3 +353,8 @@ a:hover {
     background-color: #bdbdbd; /* 悬停时稍微加深一点灰色 */
     transform: scale(1.05);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 阴影也改成灰
+
+/* 专门针对主页大标题和导航栏修复间距 */
+.profile-name, .site-title, .nav-link, .page-heading {
+    letter-spacing: 0 !important;
+}
