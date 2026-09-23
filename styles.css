@@ -320,3 +320,8 @@ a:hover {
   font-size: 0.85rem;
   color: #888;
 }
+
+/* 强制所有标题向左对齐 */
+h1, h2, h3, h4, h5, h6 {
+    text-align: left !important;
+}
