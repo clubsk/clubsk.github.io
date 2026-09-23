@@ -270,11 +270,11 @@ h1, h2, h3, h4, h5, h6 {
    首页卡片样式
    ========================================== */
 
-/* 卡片网格布局 */
+/* 卡片网格布局（改为一行一个） */
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  display: flex; /* 改用 flex 弹性布局 */
+  flex-direction: column; /* 垂直方向排列 */
+  gap: 20px; /* 卡片之间的间距 */
   margin-top: 20px;
 }
 
