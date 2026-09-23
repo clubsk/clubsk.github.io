@@ -87,19 +87,23 @@
 </div>
 
   </main>
- <!-- 竖排歌词入场动画 -->
+
+  <!-- 横字竖落入场动画 (明亮版) -->
 <div id="intro-overlay">
-    <span id="intro-text"></span>
-    <div id="skip-btn" title="跳过">跳过</div>
+    <div id="text-container"></div>
+    <div id="skip-btn" title="跳过动画">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </div>
 </div>
 
 <style>
-/* 全屏容器 */
+/* 全屏容器 - 明亮版背景 */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: linear-gradient(135deg, #7a8b99 0%, #aebbc4 100%);
+    /* 核心改动：换成更明亮的渐变 */
+    background: linear-gradient(135deg, #e8f0f2 0%, #ffffff 50%, #f5f7fa 100%);
     z-index: 99999;
     display: flex;
     justify-content: center;
@@ -107,72 +111,105 @@
     overflow: hidden;
 }
 
-/* 雾气流动 */
+/* 雾气流动 - 调成更亮的白色 */
 #intro-overlay::before {
     content: '';
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
-    opacity: 0.6;
-    filter: blur(30px);
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
+    opacity: 0.7;
+    filter: blur(40px);
     animation: mistFlow 8s ease-in-out infinite alternate;
 }
-
 @keyframes mistFlow {
     from { transform: translate(-10%, -10%) scale(1); }
     to { transform: translate(10%, 10%) scale(1.1); }
 }
 
-/* 【核心改动】竖排文字样式 */
-#intro-text {
-    color: #fdfbf7;
-    font-size: 22px; /* 竖排时字号稍微放大一点更有质感 */
-    font-family: "Songti SC", "SimSun", serif;
-    
-    /* 核心竖排属性 */
-    writing-mode: vertical-rl; /* 文字从上到下，排版从右到左 */
-    text-orientation: mixed;   /* 混合排版，适合中英文混排 */
-    
-    letter-spacing: 0.5em; /* 增加字间距，更有呼吸感 */
+/* 文字容器 */
+#text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     z-index: 1;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    
-    /* 限制高度防止撑破屏幕 */
-    max-height: 80vh; 
-    padding: 20px;
 }
 
-/* 跳过按钮 */
+/* 每一行歌词的样式 - 文字颜色加深以适配明亮背景 */
+.lyric-line {
+    color: #3a4a54; /* 深灰蓝色，在浅色背景上清晰可读 */
+    font-size: 22px;
+    font-family: "Songti SC", "SimSun", serif;
+    letter-spacing: 4px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    white-space: nowrap;
+    
+    /* 入场动画 */
+    animation: dropIn 0.8s ease-out forwards;
+    opacity: 0; 
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 跳过按钮 - 调整颜色适配明亮背景 */
 #skip-btn {
     position: absolute;
-    bottom: 40px;
-    right: 40px;
-    color: rgba(253, 251, 247, 0.8);
-    font-size: 14px;
-    font-family: sans-serif;
+    top: 30px;
+    left: 30px;
+    color: #7a8b99; /* 中灰色 */
     z-index: 10;
     cursor: pointer;
-    padding: 10px 20px;
-    border: 1px solid rgba(253, 251, 247, 0.3);
-    border-radius: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(122, 139, 153, 0.3);
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s ease;
     animation: fadeInOut 3s ease-in-out infinite;
 }
-#skip-btn:hover { background: rgba(253, 251, 247, 0.2); color: #fdfbf7; }
+
+#skip-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #3a4a54;
+    border-color: #7a8b99;
+    transform: scale(1.1);
+}
+
 @keyframes fadeInOut { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 </style>
 
 <script>
 (function() {
-    var text = "窗外的雨刚刚停\n午后气息 浓浓地才散去\n迷迷糊糊张开眼\n刚刚的梦 我似乎\n在瞬间看见你";
-    var el = document.getElementById('intro-text');
+    var lines = [
+        "窗外的雨刚刚停",
+        "午后气息 浓浓地才散去",
+        "迷迷糊糊张开眼",
+        "刚刚的梦 我似乎",
+        "在瞬间看见你"
+    ];
+    
+    var container = document.getElementById('text-container');
     var overlay = document.getElementById('intro-overlay');
     var skipBtn = document.getElementById('skip-btn');
-    var i = 0;
+    var lineIndex = 0;
+    var charIndex = 0;
     var typingTimer;
     var fadeOutTimer;
     var isTyping = true;
+    var currentLineEl = null;
 
     function fadeOut() {
         if (!isTyping) return;
@@ -187,16 +224,30 @@
     skipBtn.addEventListener('click', fadeOut);
 
     function typeWriter() {
-        if (i < text.length && isTyping) {
-            if (text.charAt(i) === '\n') {
-                el.innerHTML += '<br>';
+        if (!isTyping) return;
+
+        if (!currentLineEl) {
+            currentLineEl = document.createElement('div');
+            currentLineEl.className = 'lyric-line';
+            container.appendChild(currentLineEl);
+            charIndex = 0;
+        }
+
+        var text = lines[lineIndex];
+
+        if (charIndex < text.length) {
+            currentLineEl.textContent += text.charAt(charIndex);
+            charIndex++;
+            typingTimer = setTimeout(typeWriter, 100);
+        } else {
+            lineIndex++;
+            currentLineEl = null;
+            
+            if (lineIndex < lines.length) {
+                typingTimer = setTimeout(typeWriter, 400);
             } else {
-                el.textContent += text.charAt(i);
+                fadeOutTimer = setTimeout(fadeOut, 2000);
             }
-            i++;
-            typingTimer = setTimeout(typeWriter, 150); // 竖排稍微放慢速度更有韵味
-        } else if (isTyping) {
-            fadeOutTimer = setTimeout(fadeOut, 2000); // 竖排读完需要更多时间，多停留0.5秒
         }
     }
 
@@ -205,8 +256,6 @@
     });
 })();
 </script>
-   
-  
 
    
 
