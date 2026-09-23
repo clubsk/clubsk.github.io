@@ -87,23 +87,22 @@
 </div>
 
   </main>
-
-  <!-- 横字竖落入场动画 (明亮版) -->
+<!-- 横字竖落入场动画 (中间色调版 - 显眼跳过按钮) -->
 <div id="intro-overlay">
     <div id="text-container"></div>
-    <div id="skip-btn" title="下一站">
-        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    <div id="skip-btn" title="跳过动画">
+        <span class="skip-text">跳过</span>
+        <svg class="skip-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </div>
 </div>
 
 <style>
-/* 全屏容器 - 明亮版背景 */
+/* 全屏容器 */
 #intro-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    /* 核心改动：换成更明亮的渐变 */
-    background: linear-gradient(135deg, #e8f0f2 0%, #ffffff 50%, #f5f7fa 100%);
+    background: linear-gradient(135deg, #5a7a8a 0%, #8ba4b2 50%, #6b8e9e 100%);
     z-index: 99999;
     display: flex;
     justify-content: center;
@@ -111,16 +110,16 @@
     overflow: hidden;
 }
 
-/* 雾气流动 - 调成更亮的白色 */
+/* 雾气流动 */
 #intro-overlay::before {
     content: '';
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%);
-    opacity: 0.7;
-    filter: blur(40px);
-    animation: mistFlow 8s ease-in-out infinite alternate;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+    opacity: 0.6;
+    filter: blur(45px);
+    animation: mistFlow 9s ease-in-out infinite alternate;
 }
 @keyframes mistFlow {
     from { transform: translate(-10%, -10%) scale(1); }
@@ -136,68 +135,79 @@
     z-index: 1;
 }
 
-/* 每一行歌词的样式 - 文字颜色加深以适配明亮背景 */
+/* 每一行歌词的样式 */
 .lyric-line {
-    color: #3a4a54; /* 深灰蓝色，在浅色背景上清晰可读 */
+    color: #f8f9fa;
     font-size: 22px;
     font-family: "Songti SC", "SimSun", serif;
     letter-spacing: 4px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
     white-space: nowrap;
-    
-    /* 入场动画 */
     animation: dropIn 0.8s ease-out forwards;
-    opacity: 0; 
+    opacity: 0;
 }
 
 @keyframes dropIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* 跳过按钮 - 调整颜色适配明亮背景 */
+/* 【核心改动】跳过按钮 - 显眼版 */
 #skip-btn {
     position: absolute;
-    top: 30px;
-    left: 30px;
-    color: #7a8b99; /* 中灰色 */
+    top: 20px;           /* 距离顶部更近 */
+    right: 20px;         /* 距离右侧更近 */
     z-index: 10;
     cursor: pointer;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid rgba(122, 139, 153, 0.3);
-    background: rgba(255, 255, 255, 0.6);
+    padding: 8px 18px;   /* 内边距，让按钮更大 */
+    border-radius: 20px; /* 圆角胶囊形状 */
+    background: #ffffff; /* 纯白实心背景，非常显眼 */
+    color: #3a4a54;      /* 深色文字，对比强烈 */
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;            /* 文字和图标之间的间距 */
+    font-size: 14px;
+    font-weight: 600;    /* 加粗文字 */
+    letter-spacing: 1px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2); /* 阴影，让按钮浮起来 */
     transition: all 0.3s ease;
-    animation: fadeInOut 3s ease-in-out infinite;
+    /* 去掉原来的闪烁动画，改为更稳的悬停效果 */
+    animation: none;
+    opacity: 1;
 }
 
+/* 跳过文字 */
+.skip-text {
+    display: inline-block;
+}
+
+/* 跳过图标 */
+.skip-icon {
+    display: inline-block;
+}
+
+/* 悬停效果 - 更明显 */
 #skip-btn:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: #3a4a54;
-    border-color: #7a8b99;
-    transform: scale(1.1);
+    background: #f0f0f0;
+    color: #2c3e50;
+    transform: scale(1.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
-@keyframes fadeInOut { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+/* 点击效果 */
+#skip-btn:active {
+    transform: scale(0.95);
+}
 </style>
 
 <script>
 (function() {
     var lines = [
         "窗外的雨刚刚停",
-        "午后气息浓浓地才散去",
+        "午后气息 浓浓地才散去",
         "迷迷糊糊张开眼",
-        "刚刚的梦我似乎",
+        "刚刚的梦 我似乎",
         "在瞬间看见你"
     ];
     
@@ -252,10 +262,13 @@
     }
 
     window.addEventListener('load', function() {
-        typingTimer = setTimeout(typeWriter, 500);
+      typingTimer = setTimeout(typeWriter, 500);
     });
 })();
 </script>
+  
+   
+
 
    
 
