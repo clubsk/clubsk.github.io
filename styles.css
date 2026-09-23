@@ -265,3 +265,64 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0px !important;   /* 去除内部左缩进 */
     margin-left: 0px !important;    /* 去除外部左偏移 */
 }
+
+/* ==========================================
+   首页卡片样式
+   ========================================== */
+
+/* 卡片网格布局 */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* 单个卡片 */
+.card-item {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+/* 鼠标悬停效果 */
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: #dcdcdc;
+}
+
+/* 卡片内部链接 */
+.card-link {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 卡片标题 */
+.card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.card-title:hover {
+  color: #0056b3; /* 鼠标悬停标题变蓝 */
+}
+
+/* 卡片日期 */
+.card-meta {
+  display: flex;
+  align-items: center;
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: #888;
+}
