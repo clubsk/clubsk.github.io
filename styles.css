@@ -175,6 +175,9 @@ h1 {
 /* 二级标题样式 */
 h2 {
     font-size: 1.75em !important;
+    text-align: left !important;  /* 强制靠左 */
+    margin-left: 0 !important;    /* 清除左边距，看看是不是边距导致的缩进 */
+    padding-left: 0 !important;   /* 清除左内边距 */
 }
 
 /* 三级标题样式 */
