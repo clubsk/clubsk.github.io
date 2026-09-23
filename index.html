@@ -73,48 +73,7 @@
 </div>
 
   </main>
+
   
-  <script>
-    // 客户端渲染备份：如果 Jekyll 未渲染文章列表，使用 /posts/index.json 渲染普通链接（不拦截点击）
-    async function loadPosts(){
-      const container = document.getElementById('blog-list');
-      if (container.querySelector('.post-list')) return; // already rendered by Jekyll
-      try {
-        const res = await fetch('/posts/index.json', {cache: 'no-store'});
-        if (!res.ok) throw new Error('Fetch failed');
-        const data = await res.json();
-        const posts = data && data.posts ? data.posts : [];
-
-        if (!posts.length) {
-          container.innerHTML = '<p class="muted">暂无文章。你可以在仓库的 <code>posts/</code> 目录中添加文章。</p>';
-          return;
-        }
-
-        const ul = document.createElement('ul');
-        ul.className = 'post-list';
-        posts.forEach(post => {
-          const li = document.createElement('li');
-          li.className = 'post-item';
-          const a = document.createElement('a');
-          a.href = post.url || '#';
-          a.textContent = post.title || '(无标题)';
-
-          const meta = document.createElement('div');
-          meta.className = 'post-meta';
-          meta.textContent = post.date || '';
-
-          li.appendChild(a);
-          li.appendChild(meta);
-          ul.appendChild(li);
-        });
-        container.innerHTML = '';
-        container.appendChild(ul);
-      } catch (err) {
-        console.warn('无法加载文章列表：', err);
-        container.innerHTML = '<p class="muted">无法加载文章列表（可能是 /posts/index.json 不存在）。你可以直接访问 <a href="/posts/">/posts/</a> 查看文章。</p>';
-      }
-    }
-    document.addEventListener('DOMContentLoaded', loadPosts);
-  </script>
 </body>
 </html>
