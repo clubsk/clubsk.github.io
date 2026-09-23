@@ -157,12 +157,15 @@ blockquote:hover {
    自定义 标题 与 列表 样式 
    ========================================== */
 
-/* 统一设置所有标题的下边距和加粗 */
+/* 统一设置所有标题的边距、加粗、颜色和靠左对齐 */
 h1, h2, h3, h4, h5, h6 {
     margin-top: 1.8em !important;
     margin-bottom: 0.8em !important;
     font-weight: bold !important;
     color: var(--text) !important;
+    text-align: left !important; /* 强制所有标题靠左 */
+    margin-left: 0 !important;   /* 清除所有标题的左边距 */
+    padding-left: 0 !important;  /* 清除所有标题的左内边距 */
 }
 
 /* 一级标题样式 */
@@ -170,20 +173,10 @@ h1 {
     font-size: 2.2em !important;
     border-bottom: 2px solid #f3f4f6 !important;
     padding-bottom: 0.3em !important;
+    margin-left: 0 !important;
+    padding-left: 0 !importa
 }
 
-/* 二级标题样式 */
-h2 {
-    font-size: 1.75em !important;
-    text-align: left !important;  /* 强制靠左 */
-    margin-left: 0 !important;    /* 清除左边距，看看是不是边距导致的缩进 */
-    padding-left: 0 !important;   /* 清除左内边距 */
-}
-
-/* 三级标题样式 */
-h3 {
-    font-size: 1.35em !important;
-}
 
 /* 无序列表（小圆点列表）样式 */
 ul {
@@ -324,7 +317,3 @@ a:hover {
   color: #888;
 }
 
-/* 强制所有标题向左对齐 */
-h1, h2, h3, h4, h5, h6 {
-    text-align: left !important;
-}
