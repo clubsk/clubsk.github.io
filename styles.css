@@ -337,19 +337,19 @@ a:hover {
     margin-top: 12px;    /* 和上面文字的间距 */
 }
 
-/* 2. 单个标签的胶囊形状 */
+/* 单个标签的胶囊形状 - 灰色版 */
 .tag-item {
     display: inline-block;
-    background-color: #007bff; /* 极客蓝色背景（你可以改成你喜欢的颜色） */
-    color: #ffffff;            /* 白色文字 */
+    background-color: #e0e0e0; /* 改为浅灰色背景 */
+    color: #333333;            /* 文字改为深灰色，保证清晰可读 */
     font-size: 11px;
     padding: 3px 10px;
-    border-radius: 20px;       /* 设置足够大，让它变成胶囊形状 */
-    transition: all 0.3s ease; /* 增加过渡动画 */
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
-/* 3. 鼠标悬停时的交互效果（显得很有交互感） */
+/* 鼠标悬停时的交互效果 - 灰色版 */
 .tag-item:hover {
-    background-color: #0056b3; /* 颜色变深 */
-    transform: scale(1.05);    /* 微微放大 */
-    box-shadow: 0 2px 8px rgba
+    background-color: #bdbdbd; /* 悬停时稍微加深一点灰色 */
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 阴影也改成灰
