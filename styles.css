@@ -327,3 +327,29 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* ================= 标签终极美化样式 ================= */
+
+/* 1. 标签的容器，让标签横向排列 */
+.card-tags {
+    display: flex;       /* 让内部元素横向排列 */
+    flex-wrap: wrap;     /* 允许换行 */
+    gap: 8px;            /* 标签之间的间距 */
+    margin-top: 12px;    /* 和上面文字的间距 */
+}
+
+/* 2. 单个标签的胶囊形状 */
+.tag-item {
+    display: inline-block;
+    background-color: #007bff; /* 极客蓝色背景（你可以改成你喜欢的颜色） */
+    color: #ffffff;            /* 白色文字 */
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;       /* 设置足够大，让它变成胶囊形状 */
+    transition: all 0.3s ease; /* 增加过渡动画 */
+}
+
+/* 3. 鼠标悬停时的交互效果（显得很有交互感） */
+.tag-item:hover {
+    background-color: #0056b3; /* 颜色变深 */
+    transform: scale(1.05);    /* 微微放大 */
+    box-shadow: 0 2px 8px rgba
