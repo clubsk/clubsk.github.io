@@ -60,12 +60,26 @@
 <div class="card-grid">
   {% for post in site.posts %}
     <div class="card-item">
-      <a href="{{ post.url }}" class="card-link">
-        <h3 class="card-title">{{ post.title }}</h3>
-        <div class="card-meta">
-          <span class="card-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        </div>
-      </a>
+     <a href="{{ post.url }}" class="card-link">
+    <h3 class="card-title">{{ post.title }}</h3>
+    <div class="card-meta">
+        <span class="card-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    </div>
+    
+    <!-- 新增：文章描述 -->
+    {% if post.description %}
+    <p class="card-description">{{ post.description }}</p>
+    {% endif %}
+    
+    <!-- 新增：标签列表 -->
+    {% if post.tags %}
+    <div class="card-tags">
+        {% for tag in post.tags limit:3 %}
+            <span class="tag-item">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+</a>
     </div>
   {% endfor %}
 </div>
