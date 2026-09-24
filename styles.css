@@ -358,3 +358,71 @@ a:hover {
 .profile-name, .site-title, .nav-link, .page-heading {
     letter-spacing: 0 !important;
 }
+
+/* --- 标签汇总页美化 --- */
+#tag-list h2 {
+  margin-top: 30px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1.3em;
+  color: #333;
+}
+.tag-count {
+  font-size: 0.8em;
+  color: #999;
+  font-weight: normal;
+  margin-left: 8px;
+}
+#tag-list ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-top: 15px;
+}
+#tag-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 0.95em;
+}
+.post-date {
+  min-width: 110px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+}
+#tag-list a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s ease;
+}
+#tag-list a:hover {
+  color: #2a9d8f;
+}
+
+/* --- 文章底部标签美化 --- */
+.post-tags-box {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px dashed #eaeaea;
+}
+.tag-label {
+  color: #888;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+.tag-link {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  background-color: #f5f5f5;
+  color: #555;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: all 0.2s ease;
+}
+.tag-link:hover {
+  background-color: #333;
+  color: #fff;
+}  
