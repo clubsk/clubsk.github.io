@@ -11,8 +11,12 @@
   desc: linux基础
 
 - name: NSSCTF
-  url:  https://www.nssctf.cn/index
+  url :  https://www.nssctf.cn/index
   desc: 做题用
+
+- name: ctf wiki
+  url :  https://ctf-wiki.org/
+  desc: 官方
 
 
 
