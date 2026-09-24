@@ -426,3 +426,40 @@ a:hover {
   background-color: #333;
   color: #fff;
 }  
+
+
+  /* --- 文章底部标签胶囊美化代码 --- */
+
+/* 包裹标签的容器，加上顶部虚线分隔 */
+.post-tags-box {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px dashed #eaeaea;
+}
+
+/* 标签文字“文章标签：” */
+.tag-label {
+  color: #888;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+
+/* 胶囊标签本体样式 */
+.tag-link {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: #f5f5f5; /* 灰色背景 */
+  color: #555;
+  border-radius: 20px; /* 胶囊圆角 */
+  text-decoration: none; /* 去掉下划线 */
+  font-size: 0.85em;
+  transition: all 0.2s ease;
+}
+
+/* 鼠标悬停时变成深色胶囊 */
+.tag-link:hover {
+  background-color: #333;
+  color: #fff;
+}
