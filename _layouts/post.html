@@ -74,6 +74,16 @@
 
       <div class="post-body">
         {{ content }}
+        {% if page.tags.size > 0 %}
+  <div class="post-tags-box">
+    <span class="tag-label">文章标签：</span>
+    {% for tag in page.tags %}
+      <a href="/tags/#{{ tag | slugify }}" class="tag-link">
+        #{{ tag }}
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
       </div>
       
 
