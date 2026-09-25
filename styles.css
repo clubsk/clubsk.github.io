@@ -463,3 +463,21 @@ a:hover {
   background-color: #333;
   color: #fff;
 }
+  /* 表格样式：黑线版 */
+table {
+  width: 100%;
+  border-collapse: collapse; /* 合并边框，让线条变细且清晰 */
+  margin-bottom: 1em;
+}
+
+th, td {
+  border: 1px solid #333;    /* 【修改点】把颜色改成了深灰#333，接近纯黑 */
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5; /* 表头浅灰色背景，与黑线形成对比 */
+  font-weight: bold;
+}
+
