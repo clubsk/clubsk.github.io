@@ -74,25 +74,35 @@ layout: default
 
 <div class="tag-header">
   <h1># {{ page.tag }}</h1>
-  <p>共 {{ site.tags[page.tag] | size }} 篇文章</p>
+
+  {% assign tag_posts = site.tags[page.tag] | default: nil %}
+
+  {% if tag_posts %}
+    <p>共 {{ tag_posts | size }} 篇文章</p>
+  {% else %}
+    <p>暂无该标签文章</p>
+  {% endif %}
 </div>
 
-<div class="post-grid">
-  {% assign posts = site.tags[page.tag] | sort: "date" | reverse %}
-  {% for post in posts %}
-    <a href="{{ post.url | relative_url }}" class="post-card">
-      <div class="title">{{ post.title }}</div>
-      <div class="desc">
-        {{ post.description | default: post.excerpt | strip_html | truncate: 120 }}
-      </div>
-      <div class="meta">
-        <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
-        <span class="tags">
-          {% for t in post.tags %}
-            <span>{{ t }}</span>
-          {% endfor %}
-        </span>
-      </div>
-    </a>
-  {% endfor %}
+{% if tag_posts %}
+  <div class="post-grid">
+    {% assign posts = tag_posts | sort: "date" | reverse %}
+    {% for post in posts %}
+      <a href="{{ post.url | relative_url }}" class="post-card">
+        <div class="title">{{ post.title }}</div>
+        <div class="desc">
+          {{ post.description | default: post.excerpt | strip_html | truncate: 120 }}
+        </div>
+        <div class="meta">
+          <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+          <span class="tags">
+            {% for t in post.tags %}
+              <span>{{ t }}</span>
+            {% endfor %}
+          </span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
 </div>
