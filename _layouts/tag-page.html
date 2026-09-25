@@ -1,0 +1,105 @@
+---
+layout: default
+---
+
+<style>
+  .tag-header {
+    text-align: center;
+    margin: 40px 0 30px;
+  }
+  .tag-header h1 { font-size: 28px; margin-bottom: 8px; }
+  .tag-header p { color: #888; margin-bottom: 16px; }
+  .tag-header .back {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .tag-header .back:hover { text-decoration: underline; }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .post-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .post-card:hover {
+    border-color: #1a73e8;
+    box-shadow: 0 4px 16px rgba(26,115,232,0.12);
+    transform: translateY(-2px);
+  }
+  .post-card .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+  }
+  .post-card .desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #999;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 12px;
+  }
+  .post-card .meta .tags span {
+    background: #f0f4ff;
+    color: #1a73e8;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+</style>
+
+<div class="tag-header">
+  <h1># {{ page.tag }}</h1>
+  <p>共 {{ site.tags[page.tag] | size }} 篇文章</p>
+  <a href="{{ site.baseurl }}/tags/" class="back">← 返回标签列表</a>
+</div>
+
+<div class="post-grid">
+  {% assign posts = site.tags[page.tag] | sort: "date" | reverse %}
+  {% for post in posts %}
+    <a href="{{ post.url | relative_url }}" class="post-card">
+      <div class="title">{{ post.title }}</div>
+      <div class="desc">
+        {{ post.description | default: post.excerpt | strip_html | truncate: 120 }}
+      </div>
+      <div class="meta">
+        <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+        <span class="tags">
+          {% for t in post.tags %}
+            <span>{{ t }}</span>
+          {% endfor %}
+        </span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
