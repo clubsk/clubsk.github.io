@@ -9,12 +9,6 @@ layout: default
   }
   .tag-header h1 { font-size: 28px; margin-bottom: 8px; }
   .tag-header p { color: #888; margin-bottom: 16px; }
-  .tag-header .back {
-    color: #1a73e8;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  .tag-header .back:hover { text-decoration: underline; }
 
   .post-grid {
     display: grid;
@@ -81,7 +75,6 @@ layout: default
 <div class="tag-header">
   <h1># {{ page.tag }}</h1>
   <p>共 {{ site.tags[page.tag] | size }} 篇文章</p>
-  <a href="{{ site.baseurl }}/tags/" class="back">← 返回标签列表</a>
 </div>
 
 <div class="post-grid">
