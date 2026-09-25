@@ -5,40 +5,35 @@ title: 标签
 
 <style>
   .tl-card {
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    padding: 24px 20px;
-    text-decoration: none !important;
-    color: #111;
-    transition: border-color 5s, background 5s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
     background: #fff;
+    padding: 16px;
     cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
   }
   .tl-card:hover {
- transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
    
   }
   .tl-name { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #111; }
   .tl-count { font-size: 0.8rem; color: #999; }
 
-  .tp-card {
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 12px;
-    text-decoration: none !important;
-    color: #111;
-    transition: border-color 5s, background 5s;
-    display: block;
+   .tp-card {
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
   }
   .tp-card:hover {
-   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
    
   }
   .tp-title { font-size: 1rem; font-weight: 600; margin: 0 0 6px; color: #111; }
@@ -56,18 +51,21 @@ title: 标签
 
   .tl-back {
     display: inline-block;
-    margin-bottom: 16px;
-    padding: 6px 14px;
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    text-decoration: none !important;
-    color: #333;
-    font-size: 0.85rem;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 18px;
+    margin-top: 16px;
     cursor: pointer;
-    transition: border-color 5s, background 5s;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
   }
-  .tl-back:hover {  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);}
+  .tl-back:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }}
 
   .tl-heading {
     font-size: 1.1rem;
