@@ -88,16 +88,7 @@ layout: default
       <div class="post-body">
         {{ content }}
 
-        {% if page.tags.size > 0 %}
-          <div class="post-tags-box">
-            <span class="tag-label">文章标签：</span>
-            {% for tag in page.tags %}
-              <a href="{{ '/tags/' | relative_url }}{{ tag | slugify }}/" class="tag-link">
-                #{{ tag }}
-              </a>
-            {% endfor %}
-          </div>
-        {% endif %}
+      
       </div>
 
       <p><a class="back-link" href="{{ '/' | relative_url }}">← 返回首页</a></p>
