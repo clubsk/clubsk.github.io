@@ -63,6 +63,7 @@ layout: default
     }
 
     .back-link{display:inline-block;margin-top:18px;color:var(--accent-solid);text-decoration:none}
+    .back-link + .back-link { margin-left: 16px; }
   </style>
 </head>
 <body>
@@ -87,7 +88,12 @@ layout: default
         {{ content }}
       </div>
 
-      <p><a class="back-link" href="/">← 返回首页</a></p>
+      <p>
+        <a class="back-link" href="{{ '/' | relative_url }}">← 返回首页</a>
+        {% if page.layout == 'tag-page' %}
+          <a class="back-link" href="{{ '/tags/' | relative_url }}">← 返回标签列表</a>
+        {% endif %}
+      </p>
     </article>
   </main>
 
