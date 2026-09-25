@@ -55,7 +55,7 @@ permalink: /tags/
   {% for tag in site.tags %}
     {% assign tag_name = tag[0] %}
     {% assign posts = tag[1] %}
-    <a href="{{ '/tags/' | relative_url }}{{ tag_name | url_encode }}/" class="tag-card">
+    <a href="{{ '/tags/' | relative_url }}{{ tag_name | slugify }}/" class="tag-card">
       <span class="name">{{ tag_name }}</span>
       <span class="count">{{ posts.size }} 篇</span>
     </a>
