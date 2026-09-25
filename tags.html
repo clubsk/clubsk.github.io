@@ -5,38 +5,40 @@ title: 标签
 
 <style>
   .tl-card {
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 24px 20px;
+    text-decoration: none !important;
+    color: #111;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #fff;
-    padding: 16px;
     cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   }
   .tl-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-color: #000;
+    background: #fafafa;
   }
-   
-
   .tl-name { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #111; }
   .tl-count { font-size: 0.8rem; color: #999; }
 
-   .tp-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background: #fff;
-    padding: 16px;
-     margin-bottom: 24px;  
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  .tp-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-decoration: none !important;
+    color: #111;
+    transition: border-color 0.15s, background 0.15s;
+    display: block;
   }
   .tp-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-color: #000;
+    background: #fafafa;
   }
-   
-
   .tp-title { font-size: 1rem; font-weight: 600; margin: 0 0 6px; color: #111; }
   .tp-date { font-size: 0.8rem; color: #999; margin-bottom: 8px; }
   .tp-excerpt { font-size: 0.9rem; color: #555; margin-bottom: 10px; line-height: 1.5; }
@@ -44,7 +46,7 @@ title: 标签
     display: inline-block;
     padding: 3px 10px;
     border: 1px solid #ddd;
-    border-radius: 16px;
+    border-radius: 3px;
     font-size: 0.75rem;
     color: #666;
     background: #fff;
@@ -52,21 +54,17 @@ title: 标签
 
   .tl-back {
     display: inline-block;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    background: #fff;
-    padding: 8px 18px;
-    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none !important;
+    color: #333;
+    font-size: 0.85rem;
     cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: border-color 0.15s, background 0.15s;
   }
-  .tl-back:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }}
+  .tl-back:hover { border-color: #000; background: #fafafa; }
 
   .tl-heading {
     font-size: 1.1rem;
@@ -77,6 +75,7 @@ title: 标签
     border-bottom: 1px solid #eee;
   }
 </style>
+
 <div style="max-width: 800px; margin: 0 auto; padding: 24px 16px;">
 
   <!-- 视图1：标签总览 -->
