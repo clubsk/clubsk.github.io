@@ -1,0 +1,198 @@
+---
+layout: default
+title: 标签
+---
+
+<style>
+  .tl-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 24px 20px;
+    text-decoration: none !important;
+    color: #111;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    cursor: pointer;
+  }
+  .tl-card:hover {
+    border-color: #000;
+    background: #fafafa;
+  }
+  .tl-name { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #111; }
+  .tl-count { font-size: 0.8rem; color: #999; }
+
+  .tp-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-decoration: none !important;
+    color: #111;
+    transition: border-color 0.15s, background 0.15s;
+    display: block;
+  }
+  .tp-card:hover {
+    border-color: #000;
+    background: #fafafa;
+  }
+  .tp-title { font-size: 1rem; font-weight: 600; margin: 0 0 6px; color: #111; }
+  .tp-date { font-size: 0.8rem; color: #999; margin-bottom: 8px; }
+  .tp-excerpt { font-size: 0.9rem; color: #555; margin-bottom: 10px; line-height: 1.5; }
+  .tp-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: #666;
+    background: #fff;
+  }
+
+  .tl-back {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none !important;
+    color: #333;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .tl-back:hover { border-color: #000; background: #fafafa; }
+
+  .tl-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #111;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+</style>
+<div style="max-width: 800px; margin: 0 auto; padding: 24px 16px;">
+
+  <!-- 视图1：标签总览 -->
+  <div id="tl-tags">
+    <h2 class="tl-heading">标签分类</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags %}
+        <a href="javascript:void(0)" data-tag="{{ tag[0] | escape }}" class="tl-card">
+          <div class="tl-name">{{ tag[0] }}</div>
+          <div class="tl-count">{{ tag[1].size }} 篇</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 视图2：文章列表（初始隐藏） -->
+  <div id="tl-posts" style="display: none;">
+    <a id="tl-back" class="tl-back">返回</a>
+    <h2 id="tl-title" class="tl-heading"></h2>
+    <div id="tl-list"></div>
+  </div>
+
+</div>
+<script>
+(function () {
+  var TAG_DATA = {
+    {% for tag in site.tags %}
+      {{ tag[0] | jsonify }}: [
+        {% for post in tag[1] %}
+        {
+          title: {{ post.title | jsonify }},
+          url: "{{ post.url | relative_url }}",
+          date: "{{ post.date | date: '%Y-%m-%d' }}",
+          desc: {{ post.description | replace: '</script>', '<\\/script>' | jsonify }},
+          excp: {{ post.excerpt | replace: '</script>', '<\\/script>' | jsonify }},
+          body: {{ post.content | strip_html | truncate: 100 | replace: '</script>', '<\\/script>' | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
+
+  var $tags = document.getElementById('tl-tags');
+  var $posts = document.getElementById('tl-posts');
+  var $title = document.getElementById('tl-title');
+  var $list = document.getElementById('tl-list');
+  var $back = document.getElementById('tl-back');
+
+  function render(tagName) {
+    var posts = TAG_DATA[tagName];
+    if (!posts || !posts.length) return false;
+
+    $tags.style.display = 'none';
+    $posts.style.display = 'block';
+    $title.textContent = tagName;
+    $list.innerHTML = '';
+
+    posts.forEach(function (post) {
+      var summary = post.desc || post.excp || post.body || '';
+      var card = document.createElement('a');
+      card.className = 'tp-card';
+      card.href = post.url;
+
+      var h4 = document.createElement('h4');
+      h4.className = 'tp-title';
+      h4.textContent = post.title;
+
+      var d = document.createElement('p');
+      d.className = 'tp-date';
+      d.textContent = post.date;
+
+      var e = document.createElement('p');
+      e.className = 'tp-excerpt';
+      e.textContent = summary;
+
+      var t = document.createElement('span');
+      t.className = 'tp-tag';
+      t.textContent = tagName;
+
+      card.appendChild(h4);
+      card.appendChild(d);
+      card.appendChild(e);
+      card.appendChild(t);
+      $list.appendChild(card);
+    });
+
+    window.scrollTo({ top: 0 });
+    return true;
+  }
+
+  function openTag(tagName) {
+    if (render(tagName)) {
+      history.pushState({ tag: tagName }, '', '?tag=' + encodeURIComponent(tagName));
+    }
+  }
+
+  function goBack() {
+    $posts.style.display = 'none';
+    $tags.style.display = 'block';
+    history.pushState(null, '', location.pathname);
+    window.scrollTo({ top: 0 });
+  }
+
+  $tags.addEventListener('click', function (e) {
+    var card = e.target.closest('.tl-card');
+    if (card) { e.preventDefault(); openTag(card.getAttribute('data-tag')); }
+  });
+
+  $back.addEventListener('click', function (e) { e.preventDefault(); goBack(); });
+
+  window.addEventListener('popstate', function () {
+    var p = new URLSearchParams(location.search);
+    var t = p.get('tag');
+    if (t && TAG_DATA[t]) render(t); else { $posts.style.display = 'none'; $tags.style.display = 'block'; }
+  });
+
+  var init = new URLSearchParams(location.search).get('tag');
+  if (init) render(init);
+})();
+</script>
