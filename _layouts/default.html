@@ -1,108 +1,33 @@
----
-layout: default
----
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;">
+      <div class="site-avatar" style="display:inline-block;vertical-align:middle;margin-right:12px;">
+        <img src="/assets/20200514115600_uaypl.png" alt="clubsk avatar" class="avatar-img" style="width:100px;height:100px;border-radius:50%;object-fit:cover;">
+      </div>
+      <div style="display:inline-block;vertical-align:middle;">
+        <h1><a href="/">c l u b s k</a></h1>
+        <p class="tagline">等我们学会飞，飞越黑夜和考验，日子就要从孤单里毕业</p>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="/">首页</a>
+          <a href="/blog.html">博客</a>
+          <a href="/links">链接</a>
+          <a href="/tags/" class="menu-link">标签</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-<style>
-  .tag-header {
-    text-align: center;
-    margin: 40px 0 30px;
-  }
-  .tag-header h1 { font-size: 28px; margin-bottom: 8px; }
-  .tag-header p { color: #888; margin-bottom: 16px; }
-
-  .post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  .post-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 24px;
-    text-decoration: none;
-    color: #333;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-  .post-card:hover {
-    border-color: #1a73e8;
-    box-shadow: 0 4px 16px rgba(26,115,232,0.12);
-    transform: translateY(-2px);
-  }
-  .post-card .title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #1a1a1a;
-  }
-  .post-card .desc {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-    flex: 1;
-    margin-bottom: 16px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .post-card .meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: #999;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 12px;
-  }
-  .post-card .meta .tags span {
-    background: #f0f4ff;
-    color: #1a73e8;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-left: 4px;
-  }
-</style>
-
-<div class="tag-header">
-  <h1># {{ page.tag }}</h1>
-
-  {% assign tag_posts = site.tags[page.tag] | default: nil %}
-
-  {% if tag_posts %}
-    <p>共 {{ tag_posts | size }} 篇文章</p>
-  {% else %}
-    <p>暂无该标签文章</p>
-  {% endif %}
-</div>
-
-{% if tag_posts %}
-  <div class="post-grid">
-    {% assign posts = tag_posts | sort: "date" | reverse %}
-    {% for post in posts %}
-      <a href="{{ post.url | relative_url }}" class="post-card">
-        <div class="title">{{ post.title }}</div>
-        <div class="desc">
-          {{ post.description | default: post.excerpt | strip_html | truncate: 120 }}
-        </div>
-        <div class="meta">
-          <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
-          <span class="tags">
-            {% for t in post.tags %}
-              <span>{{ t }}</span>
-            {% endfor %}
-          </span>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
-{% endif %}
-</div>
+  <main id="main" class="content" role="main">
+    {{ content }}
+  </main>
+</body>
+</html>
