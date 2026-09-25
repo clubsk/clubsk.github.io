@@ -13,88 +13,27 @@ permalink: /tags/
     margin: 30px auto;
     padding: 0 20px;
   }
-
   .tag-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    padding: 25px 10px;
-    text-decoration: none;
-    color: #333;
-    transition: all 0.2s ease;
-    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background-color: #f5f5f5; border-radius: 8px; padding: 25px 10px;
+    text-decoration: none; color: #333; transition: all 0.2s ease; cursor: pointer;
   }
-
   .tag-card:hover {
-    background-color: #e0e0e0;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #e0e0e0; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
-  .tag-name {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-
-  .tag-count {
-    background-color: #444;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-family: monospace;
-  }
-
-  .tag-detail {
-    display: none;
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 20px;
-  }
-
-  .tag-post-list {
-    list-style: none;
-    padding: 0;
-  }
-
+  .tag-name { font-size: 16px; font-weight: bold; margin-bottom: 15px; }
+  .tag-count { background-color: #444; color: #fff; padding: 5px 10px; border-radius: 4px; font-size: 13px; font-family: monospace; }
+  .tag-detail { display: none; max-width: 800px; margin: 30px auto; padding: 0 20px; }
+  .tag-post-list { list-style: none; padding: 0; }
   .tag-post-list li {
-    padding: 15px 0;
-    border-bottom: 1px solid #f3f4f6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 15px 0; border-bottom: 1px solid #f3f4f6;
+    display: flex; justify-content: space-between; align-items: center;
   }
-
-  .tag-post-list li:last-child {
-    border-bottom: none;
-  }
-
-  .tag-post-link {
-    font-size: 1.1rem;
-    color: #333;
-    text-decoration: none;
-  }
-
-  .tag-post-link:hover {
-    color: #1a73e8;
-  }
-
-  .tag-post-date {
-    font-size: 0.85rem;
-    color: #999;
-  }
-
-  .back-link {
-    display: inline-block;
-    margin-top: 20px;
-    color: #1a73e8;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  .tag-post-list li:last-child { border-bottom: none; }
+  .tag-post-link { font-size: 1.1rem; color: #333; text-decoration: none; }
+  .tag-post-link:hover { color: #1a73e8; }
+  .tag-post-date { font-size: 0.85rem; color: #999; }
+  .back-link { display: inline-block; margin-top: 20px; color: #1a73e8; text-decoration: none; cursor: pointer; }
 </style>
 
 <h2 id="tags-title">标签</h2>
@@ -104,8 +43,8 @@ permalink: /tags/
     {% for tag in site.tags %}
       <a href="javascript:void(0);"
          class="tag-card"
-         data-tag="{{ tag[0] | escape }}"
-         onclick="showTag('{{ tag[0] | escape }}')">
+         data-target="tag-{{ tag[0] | slugify }}"
+         onclick="showTag('{{ tag[0] | slugify }}', '{{ tag[0] }}')">
         <span class="tag-name">{{ tag[0] }}</span>
         <span class="tag-count">{{ tag[1].size }}</span>
       </a>
@@ -117,11 +56,8 @@ permalink: /tags/
 
 {% if site.tags.size > 0 %}
   {% for tag in site.tags %}
-    <div class="tag-detail" id="tag-{{ tag[0] | escape }}">
-      <p>
-        正在查看 <strong>#{{ tag[0] }}</strong>，共 {{ tag[1].size }} 篇文章：
-      </p>
-
+    <div class="tag-detail" id="tag-{{ tag[0] | slugify }}">
+      <p>正在查看 <strong>#{{ tag[0] }}</strong>，共 {{ tag[1].size }} 篇文章：</p>
       <ul class="tag-post-list">
         {% for post in tag[1] %}
           <li>
@@ -130,35 +66,30 @@ permalink: /tags/
           </li>
         {% endfor %}
       </ul>
-
       <a class="back-link" onclick="showAllTags()">← 返回标签列表</a>
     </div>
   {% endfor %}
 {% endif %}
 
+<!-- 放在页面最底部，防止被其他脚本干扰 -->
 <script>
-  function showTag(tagName) {
+  function showTag(slug, originalName) {
+    // 隐藏卡片和标题
     document.getElementById('tag-grid').style.display = 'none';
     document.getElementById('tags-title').style.display = 'none';
 
+    // 隐藏所有详情区块
     var details = document.querySelectorAll('.tag-detail');
     for (var i = 0; i < details.length; i++) {
       details[i].style.display = 'none';
     }
 
-    var target = document.getElementById('tag-' + tagName);
+    // 显示目标区块
+    var targetId = 'tag-' + slug;
+    var target = document.getElementById(targetId);
     if (target) {
       target.style.display = 'block';
+    } else {
+      alert('系统无法显示标签“' + originalName + '”，请检查是否有文章使用了该标签。');
+      showAllTags(); // 如果找不到，自动返回卡片列表
     }
-  }
-
-  function showAllTags() {
-    document.getElementById('tag-grid').style.display = 'grid';
-    document.getElementById('tags-title').style.display = 'block';
-
-    var details = document.querySelectorAll('.tag-detail');
-    for (var i = 0; i < details.length; i++) {
-      details[i].style.display = 'none';
-    }
-  }
-</script>
