@@ -76,7 +76,7 @@
           {% if page.tags %}
             · 标签：
             {% for t in page.tags %}
-              <a href="{{ '/tags.html' | relative_url }}#{{ t | slugify }}" class="tag">
+              <a href="{{ '/tags/' | relative_url }}{{ t | slugify }}/" class="tag">
                 {{ t }}
               </a>
             {% endfor %}
@@ -91,7 +91,7 @@
           <div class="post-tags-box">
             <span class="tag-label">文章标签：</span>
             {% for tag in page.tags %}
-              <a href="{{ '/tags.html' | relative_url }}#{{ tag | slugify }}" class="tag-link">
+              <a href="{{ '/tags/' | relative_url }}{{ tag | slugify }}/" class="tag-link">
                 #{{ tag }}
               </a>
             {% endfor %}
@@ -99,7 +99,7 @@
         {% endif %}
       </div>
 
-      <p><a class="back-link" href="/">← 返回首页</a></p>
+      <p><a class="back-link" href="{{ '/' | relative_url }}">← 返回首页</a></p>
     </article>
   </main>
 
