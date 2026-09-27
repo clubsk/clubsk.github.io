@@ -30,4 +30,55 @@
     {{ content }}
   </main>
 </body>
+    </main>
+
+  <!-- 右下角悬浮球代码开始 -->
+  <button id="theme-toggle" aria-label="切换主题" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    background-color: #222;
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  ">🌙</button>
+  
+  <script>
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // 恢复之前保存的主题状态
+    if (localStorage.getItem('theme') === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+
+    // 点击切换逻辑
+    themeBtn.addEventListener('click', () => {
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeBtn.textContent = '🌙';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeBtn.textContent = '☀️';
+      }
+    });
+  </script>
+  <!-- 右下角悬浮球代码结束 -->
+
+</body>
+</html>
+
 </html>
