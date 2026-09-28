@@ -12,18 +12,25 @@ layout: default
   <link rel="stylesheet" href="/styles.css">
   <style>
 
-  <div class="post">
+ <!-- 页面整体容器 -->
+<div class="post">
   
-  <!-- 左侧：文章正文 -->
+  <!-- 左侧：文章正文区域 -->
   <div class="post-content">
+    <!-- 开启 Jekyll 原生目录生成 -->
+    * TOC
+    {:toc}
+    
+    <!-- 文章正文 -->
     {{ content }}
   </div>
 
-  <!-- 右侧：新增的目录区域 -->
+  <!-- 右侧：目录区域（只有当文章开头有 toc: true 时才显示） -->
   {% if page.toc %}
   <aside class="post-toc">
     <div class="toc-title">CONTENTS</div>
-    {% include toc.html html=content min_level=2 max_level=4 %}
+    <!-- 这里的 id="markdown-toc" 就是上面 * TOC 自动生成的 -->
+    <div id="markdown-toc"></div> 
   </aside>
   {% endif %}
 
