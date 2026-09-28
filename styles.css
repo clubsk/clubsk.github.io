@@ -510,4 +510,38 @@ th {
   box-shadow: none;
 }
 
+/* 文章页目录增强样式 */
+.post {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 0 16px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+.post-header { margin-bottom: 18px; }
+.post-title { font-size: 2rem; margin: 0 0 6px 0; color: var(--accent-solid); }
+.post-meta { color: var(--muted); font-size: 0.95rem; }
+
+.post-content { flex: 1; min-width: 0; }
+.post-content img { max-width: 100%; height: auto; display: block; margin: 12px 0; }
+
+.post-toc {
+  flex: 0 0 250px;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+}
+
+.post-toc .toc-title { font-weight: bold; margin-bottom: 12px; font-size: 0.9rem; }
+.post-toc ul { list-style: none; padding-left: 0; font-size: 0.9rem; }
+.post-toc li { margin-bottom: 6px; }
+.post-toc a { text-decoration: none; color: var(--muted); }
+.post-toc a:hover { color: var(--accent-solid); }
+
+
 
