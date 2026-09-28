@@ -11,12 +11,34 @@ layout: default
   <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/styles.css">
   <style>
-    /* 文章页加强样式 */
-    .post { max-width: 880px; margin: 28px auto; padding: 0 16px; }
-    .post-header{margin-bottom:18px}
-    .post-title{font-size:2rem;margin:0 0 6px 0;color:var(--accent-solid)}
-    .post-meta{color:var(--muted);font-size:0.95rem}
-    .post-body img{max-width:100%;height:auto;display:block;margin:12px 0}
+      /* 文章页加强样式 */
+  /* 1. 将主容器加宽，用于容纳正文和右侧目录 */
+  .post { max-width: 1200px; margin: 28px auto; padding: 0 16px; display: flex; gap: 40px; align-items: flex-start; }
+  .post-header{margin-bottom:18px}
+  .post-title{font-size:2rem;margin:0 0 6px 0;color:var(--accent-solid)}
+  .post-meta{color:var(--muted);font-size:0.95rem}
+  
+  /* 2. 左侧正文自适应宽度 */
+  .post-content { flex: 1; min-width: 0; }
+  .post-content img{max-width:100%;height:auto;display:block;margin:12px 0}
+
+  /* 3. 右侧目录悬浮样式 */
+  .post-toc { 
+    flex: 0 0 250px; /* 固定宽度 */
+    position: sticky; /* 核心：实现悬浮 */
+    top: 30px; /* 距离浏览器顶部距离 */
+    max-height: calc(100vh - 60px);
+    overflow-y: auto; /* 目录太长时显示滚动条 */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6); /* 稍微透点底，看主题背景色自行微调 */
+    border-radius: 12px;
+  }
+  
+  .post-toc .toc-title { font-weight: bold; margin-bottom: 12px; font-size: 0.9rem; }
+  .post-toc ul { list-style: none; padding-left: 0; font-size: 0.9rem; }
+  .post-toc li { margin-bottom: 6px; }
+  .post-toc a { text-decoration: none; color: var(--muted); }
+  .post-toc a:hover { color: var(--accent-solid); }
 
     /* 代码块：改成白底黑字，视觉更清爽 */
     .post-body pre,
