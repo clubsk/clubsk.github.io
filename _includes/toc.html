@@ -1,0 +1,20 @@
+{% assign toc_html = include.html %}
+{% assign min_level = include.min_level | default: 2 %}
+{% assign max_level = include.max_level | default: 4 %}
+{% assign headings = toc_html | split: '<h' %}
+
+<ul>
+  {% for heading in headings offset:1 %}
+    {% assign level = heading | slice: 0 | plus: 0 %}
+    {% if level >= min_level and level <= max_level %}
+      {% assign id = heading | split: 'id="' | last | split: '"' | first %}
+      {% assign title = heading | split: '>' | last | split: '</h' | first | strip_html | strip %}
+
+      {% if id != "" and title != "" %}
+        <li class="toc-level-{{ level }}" style="margin-left: {{ level | minus: min_level | times: 15 }}px; margin-bottom: 8px;">
+          <a href="#{{ id }}">{{ title }}</a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ul>
