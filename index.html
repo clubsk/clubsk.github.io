@@ -17,6 +17,69 @@
   <link rel="canonical" href="https://clubsk.github.io/">
   <style>
     .post-toggle{cursor:pointer}
+    
+    /* 分页样式 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 40px 0 60px;
+      flex-wrap: wrap;
+    }
+
+    .pagination a,
+    .pagination span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(16, 24, 40, 0.12);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .pagination a:hover {
+      background: var(--accent-solid);
+      color: #ffffff;
+      border-color: var(--accent-solid);
+      transform: translateY(-2px);
+    }
+
+    .pagination .page-current {
+      background: var(--accent-solid);
+      color: #ffffff;
+      border-color: var(--accent-solid);
+      cursor: default;
+    }
+
+    .pagination .page-disabled {
+      color: rgba(16, 24, 40, 0.3);
+      cursor: not-allowed;
+      border-color: rgba(16, 24, 40, 0.06);
+    }
+
+    .pagination .page-disabled:hover {
+      background: transparent;
+      transform: none;
+    }
+
+    .pagination .page-info {
+      width: auto;
+      border: none;
+      cursor: default;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .pagination .page-info:hover {
+      background: transparent;
+      transform: none;
+    }
   </style>
 </head>
 <body>
@@ -59,7 +122,7 @@
 {% else %}
   <!-- 博客列表容器 -->
 <div class="card-grid">
-  {% for post in site.posts %}
+  {% for post in site.posts limit:10 %}
     <div class="card-item">
      <a href="{{ post.url }}" class="card-link">
     <h3 class="card-title">{{ post.title }}</h3>
@@ -84,6 +147,17 @@
     </div>
   {% endfor %}
 </div>
+
+<!-- 分页导航 -->
+<nav class="pagination" role="navigation" aria-label="分页导航">
+  {% assign total_pages = site.posts | size | divided_by: 10.0 | ceil %}
+  {% if total_pages > 1 %}
+    <span class="page-info">第 1 页，共 {{ total_pages }} 页</span>
+    {% if total_pages > 1 %}
+      <a href="/page2.html" class="page-next">下一页</a>
+    {% endif %}
+  {% endif %}
+</nav>
 {% endif %}
 </div>
 
@@ -271,9 +345,7 @@
    
 
 
-   
+    
 
-
-  
 </body>
 </html>
