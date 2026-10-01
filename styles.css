@@ -105,14 +105,6 @@ a{color:var(--accent-solid)}
 }
 .button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(2,6,23,0.16)}
 
-/* 小屏适配 */
-@media (max-width:720px){
-  .site-header{padding:36px 12px;border-radius:0 0 16px 16px}
-  .site-header h1{font-size:1.5rem}
-  .site-nav{display:block;margin-top:8px}
-}
-
-
 /* avatar 样式 — 追加：将外部图片在浏览器中顺时针旋转 90deg 并裁成圆形 */
 .site-header .header-top{ display:flex; align-items:center; gap:18px; justify-content:center; flex-wrap:wrap; }
 .site-avatar{ width:120px; height:120px; flex:0 0 120px; display:block; border-radius:50%; overflow:hidden; }
@@ -120,12 +112,6 @@ a{color:var(--accent-solid)}
   width:100%; height:100%; object-fit:cover;aspect:1/1
   display:block;
   border-radius:50%;
-}
-
-/* 小屏适配与响应式头像尺寸 */
-@media (max-width:720px){
-  .site-avatar{ width:64px; height:64px; flex:0 0 64px; }
-  .site-header .header-top{ padding:12px 8px; }
 }
 
 /* 调整站点标题在头像旁边显示 */
@@ -352,7 +338,8 @@ a:hover {
 .tag-item:hover {
     background-color: #bdbdbd; /* 悬停时稍微加深一点灰色 */
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 阴影也改成灰
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 阴影也改成灰*/
+}
 
 /* 专门针对主页大标题和导航栏修复间距 */
 .profile-name, .site-title, .nav-link, .page-heading {
@@ -437,7 +424,7 @@ a:hover {
   border-top: 1px dashed #eaeaea;
 }
 
-/* 标签文字“文章标签：” */
+/* 标签文字"文章标签：" */
 .tag-label {
   color: #888;
   font-size: 0.9em;
@@ -524,5 +511,349 @@ th {
   margin: 0.6em auto;
 }
 
+/* ====== 增强小屏适配 @media (max-width: 720px) ====== */
+@media (max-width:720px) {
+  /* 容器宽度和内边距调整 */
+  .wrap {
+    padding: 0 12px;
+  }
 
+  /* 头部优化 */
+  .site-header {
+    padding: 28px 12px;
+    border-radius: 0 0 12px 12px;
+  }
 
+  .site-header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .site-header .tagline {
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+
+  /* 导航栏在小屏上垂直排列 */
+  .site-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .site-nav a {
+    display: block;
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* 头像和标题堆叠 */
+  .site-header .header-top {
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .site-avatar {
+    width: 80px;
+    height: 80px;
+    flex: 0 0 80px;
+    margin-right: 0;
+  }
+
+  .site-title {
+    text-align: center;
+    align-items: center;
+  }
+
+  /* 内容区间距 */
+  .content {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+
+  /* 卡片优化 */
+  section {
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+  }
+
+  /* 博客卡片在小屏上优化 */
+  .card-grid {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .card-item {
+    border-radius: 10px;
+  }
+
+  .card-link {
+    padding: 14px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .card-date {
+    font-size: 0.80rem;
+  }
+
+  .card-description {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .tag-item {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  /* 标签页面优化 */
+  #tag-list h2 {
+    margin-top: 20px;
+    font-size: 1.1em;
+  }
+
+  #tag-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.90em;
+  }
+
+  .post-date {
+    min-width: auto;
+    margin-bottom: 4px;
+  }
+
+  /* 文章页优化 */
+  .post {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .post-title {
+    font-size: 1.6rem;
+  }
+
+  .post-toc {
+    flex: none;
+    position: static;
+    max-height: none;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #f8f8f8;
+  }
+
+  .post-toc ul {
+    font-size: 0.85rem;
+  }
+
+  .post-toc a {
+    color: var(--text);
+  }
+
+  /* 表格在小屏上响应式 */
+  table {
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 6px 8px;
+  }
+
+  /* 页脚优化 */
+  .site-footer {
+    padding: 16px 12px;
+    font-size: 0.9rem;
+  }
+
+  /* 动画入场效果在小屏上调整 */
+  .lyric-line {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  #skip-btn {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* 代码块在小屏上优化 */
+  pre, code {
+    font-size: 0.85rem;
+  }
+
+  .highlight pre {
+    padding: 8px;
+  }
+
+  /* 标题在小屏上缩小 */
+  h1 {
+    font-size: 1.8em !important;
+  }
+
+  h2 {
+    font-size: 1.4em !important;
+  }
+
+  h3 {
+    font-size: 1.1em !important;
+  }
+
+  h4, h5, h6 {
+    font-size: 1em !important;
+  }
+
+  /* 列表在小屏上调整 */
+  ul {
+    padding-left: 1.6em !important;
+  }
+
+  /* 文章标签区 */
+  .post-tags-box {
+    margin-top: 30px;
+    padding-top: 12px;
+  }
+
+  .tag-link {
+    font-size: 0.80em;
+    padding: 3px 8px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+
+  /* 块引用在小屏上优化 */
+  blockquote {
+    margin: 0.4em 0 !important;
+    padding: 0.5em 0.6em 0.5em 1em !important;
+  }
+}
+
+/* 超小屏适配 @media (max-width: 480px) */
+@media (max-width: 480px) {
+  .wrap {
+    padding: 0 10px;
+  }
+
+  .site-header {
+    padding: 20px 10px;
+  }
+
+  .site-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .site-header .tagline {
+    font-size: 0.85rem;
+  }
+
+  .site-nav a {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  .site-avatar {
+    width: 70px;
+    height: 70px;
+    flex: 0 0 70px;
+  }
+
+  .content {
+    margin: 12px auto;
+    padding: 0 10px;
+  }
+
+  section {
+    padding: 12px;
+  }
+
+  .card-link {
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+  }
+
+  .card-date {
+    font-size: 0.75rem;
+  }
+
+  .card-description {
+    font-size: 12px;
+  }
+
+  .tag-item {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .post-title {
+    font-size: 1.4rem;
+  }
+
+  h1 {
+    font-size: 1.6em !important;
+  }
+
+  h2 {
+    font-size: 1.2em !important;
+  }
+
+  h3 {
+    font-size: 1em !important;
+  }
+
+  .lyric-line {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  #skip-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .post-toc {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post-toc ul {
+    font-size: 0.80rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 4px 6px;
+  }
+
+  pre, code {
+    font-size: 0.80rem;
+  }
+
+  ul {
+    padding-left: 1.4em !important;
+  }
+
+  #tag-list li {
+    font-size: 0.85em;
+  }
+
+  .tag-link {
+    font-size: 0.75em;
+    padding: 2px 6px;
+  }
+}
