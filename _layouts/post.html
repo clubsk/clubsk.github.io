@@ -207,6 +207,20 @@ layout: default
     display: block;
   }
 
+  /* 文章内容图片样式 */
+  .post-body img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px 0;
+    border-radius: 8px;
+  }
+
+  .post-body img[alt] {
+    outline: 1px solid rgba(16, 24, 40, 0.08);
+    padding: 4px;
+  }
+
   @media (max-width: 920px) {
     .post { display: block; }
     .post-toc { display: none; }
@@ -238,6 +252,10 @@ layout: default
     .toc-toggle-btn {
       bottom: 20px;
       right: 16px;
+    }
+
+    .post-body img {
+      margin: 12px 0;
     }
   }
   </style>
