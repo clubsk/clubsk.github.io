@@ -57,7 +57,7 @@
 {% else %}
   <!-- 博客列表容器 -->
 <div class="card-grid">
-  {% for post in site.posts limit:10 %}
+  {% for post in site.posts limit:100 %}
     <div class="card-item">
      <a href="{{ post.url }}" class="card-link">
     <h3 class="card-title">{{ post.title }}</h3>
