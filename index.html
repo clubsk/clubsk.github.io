@@ -96,7 +96,7 @@
     var itemsPerPage = 10; 
     var currentPage = 1;
     // 获取页面上所有文章列表项
-    var postItems = document.querySelectorAll('.post-item'); 
+   var postItems = document.querySelectorAll('#blog-list .card-item');
     var totalPages = Math.ceil(postItems.length / itemsPerPage);
 
     function renderPage(page) {
