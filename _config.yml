@@ -1,5 +1,0 @@
-plugins:
-  - jekyll-paginate
-
-paginate: 10
-paginate_path: "/page:num/"
