@@ -1,0 +1,60 @@
+:root{
+  /* 默认（浅色）配色变量 */
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --link: #1d4ed8;
+  --code-bg: #f3f4f6;
+  --transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* 深色主题覆盖 */
+html.dark {
+  --bg: #0b0f12;
+  --text: #e6eef6;
+  --muted: #94a3b8;
+  --link: #60a5fa;
+  --code-bg: #071022;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition);
+}
+
+/* 常见元素适配 */
+a { color: var(--link); }
+p, li, h1, h2, h3, h4, h5 { color: var(--text); }
+code, pre { background: var(--code-bg); color: var(--text); }
+
+/* 主题切换按钮样式（可按需调整） */
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border:1px solid rgba(0,0,0,0.08);
+  background: transparent;
+  color: var(--text);
+  border-radius:8px;
+  cursor:pointer;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+#theme-toggle:active{ transform: scale(0.98); }
+#theme-toggle svg{ width:20px; height:20px; pointer-events:none; }
+
+/* 保证 header 中的绝对定位按钮能放置 */
+.post-header { position: relative; }
+
+/* 图片统一样式：响应式不超出容器 */
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.6em auto;
+}
+
+/* 可选的小屏/布局调整（如果需要） */
+.header-right { display:flex; gap:0.5rem; align-items:center; }
