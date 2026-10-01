@@ -371,35 +371,5 @@ layout: default
   });
 </script>
 
-    // 小屏目录开关逻辑
-    var tocToggleBtn = document.getElementById('toc-toggle-btn');
-    var tocSidebar = document.getElementById('toc-sidebar');
-    var tocOverlay = document.getElementById('toc-overlay');
-    var tocCloseBtn = document.getElementById('toc-close-btn');
-
-    function openToc() {
-      tocSidebar.classList.add('active');
-      tocOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeToc() {
-      tocSidebar.classList.remove('active');
-      tocOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    tocToggleBtn.addEventListener('click', openToc);
-    tocCloseBtn.addEventListener('click', closeToc);
-    tocOverlay.addEventListener('click', closeToc);
-
-    // 点击目录链接后自动关闭
-    document.getElementById('markdown-toc').addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        setTimeout(closeToc, 300);
-      }
-    });
-  });
-  </script>
 </body>
 </html>
