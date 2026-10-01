@@ -38,10 +38,21 @@ layout: default
     border: 1px solid rgba(16,24,40,0.04);
   }
   .toc-title { font-weight: bold; margin-bottom: 12px; font-size: 0.95rem; }
-  .toc-list { list-style: none; padding-left: 0; margin: 0; font-size: 0.95rem; }
-  .toc-list li { margin-bottom: 8px; }
-  .toc-list li a { color: var(--muted); text-decoration: none; }
-  .toc-list li a:hover { color: var(--accent-solid); }
+ /* 给目录链接加上过渡动画的基础，让效果更丝滑 */
+.toc-list li a {
+    display: block;           /* 让 padding 和 border 生效的必须条件 */
+    padding: 4px 0;
+    border-left: 2px solid transparent; /* 预留一个透明的高亮竖条 */
+    transition: all 0.2s ease; /* 0.2秒的平滑过渡 */
+}
+
+/* 鼠标悬浮在目录标题上的特效 */
+.toc-list li a:hover {
+    color: var(--accent-solid);      /* 文字变成高亮主题色 */
+    padding-left: 6px;               /* 整体向右微微移动 */
+    border-left-color: var(--accent-solid); /* 左边弹出高亮颜色的小竖条 */
+}
+
   .toc-h2 { margin-left: 0; font-weight: 600; }
   .toc-h3 { margin-left: 8px; font-weight: 500; }
   .toc-h4 { margin-left: 16px; font-weight: 400; }
