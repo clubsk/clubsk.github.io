@@ -211,7 +211,7 @@ body, p, li, blockquote {
 /* 标题 */
 h1, h2, h3, h4, h5, h6 {
     font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 /* ==================================
@@ -228,7 +228,7 @@ body {
 /* 确保所有标题（包括首页的站点名、栏目名）都用这个字体，且不加粗 */
 h1, h2, h3, h4, h5, h6 {
     font-family: "LXGW WenKai", "KaiTi", "楷体", serif !important;
-    font-weight: normal !important;
+    font-weight: bold !important;
 }
 
 /* 确保文章标题、摘要、日期等元素也使用这个字体 */
