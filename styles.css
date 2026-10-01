@@ -534,20 +534,22 @@ th {
     margin-top: 6px;
   }
 
-  /* 导航栏在小屏上垂直排列 */
+  /* 导航栏在小屏上保持横向排列，但更紧凑 */
   .site-nav {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    flex-direction: row;
+    gap: 8px;
     margin-top: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .site-nav a {
-    display: block;
+    display: inline-block;
     margin: 0;
-    padding: 8px 12px;
-    font-size: 0.95rem;
-    text-align: center;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   /* 头像和标题堆叠 */
@@ -756,9 +758,14 @@ th {
     font-size: 0.85rem;
   }
 
+  /* 导航栏在超小屏上保持横向，间距更小 */
+  .site-nav {
+    gap: 4px;
+  }
+
   .site-nav a {
-    font-size: 0.85rem;
-    padding: 6px 10px;
+    padding: 5px 8px;
+    font-size: 0.75rem;
   }
 
   .site-avatar {
