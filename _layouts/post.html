@@ -327,7 +327,7 @@ layout: default
   document.addEventListener('DOMContentLoaded', function () {
     // Build TOC from headings
     try {
-      var body = document.querySelector('.post-body');
+      var body = document.querySelector('.post-content');
       if (!body) return;
 
       var headings = body.querySelectorAll('h2, h3, h4');
