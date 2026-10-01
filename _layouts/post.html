@@ -91,35 +91,8 @@ layout: default
     font-size: 1.2em;
   }
 
-  /* 小屏目录按钮样式 */
-  .toc-toggle-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--accent-solid);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    box-shadow: 0 4px 12px rgba(16,24,40,0.2);
-    transition: all 0.3s ease;
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    display: none;
-  }
-
-  .toc-toggle-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(16,24,40,0.3);
-  }
-
-  .toc-toggle-btn:active {
-    transform: scale(0.95);
-  }
+ 
+  
 
   /* 侧边栏目录容器 */
   .toc-sidebar {
@@ -370,6 +343,37 @@ layout: default
     tocContainer.innerHTML = '<div style="margin-bottom: 10px; font-weight: bold;">目录</div>' + tocHTML;
   });
 </script>
+
+<!-- 手机端悬浮目录按钮（三条横线） -->
+<button class="toc-toggle-btn" id="toc-toggle-btn">
+    <div></div>
+</button>
+
+<!-- 半透明遮罩层 -->
+<div class="toc-overlay" id="toc-overlay"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById('toc-toggle-btn');
+    var sidebar = document.querySelector('.post-toc');
+    var overlay = document.getElementById('toc-overlay');
+
+    if (btn && sidebar && overlay) {
+        // 点击按钮：打开目录
+        btn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // 点击遮罩层：关闭目录
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    }
+});
+</script>
+
 
 </body>
 </html>
