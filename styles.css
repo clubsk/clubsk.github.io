@@ -902,7 +902,7 @@ div.highlighter-rouge {
     border: none;
     cursor: pointer;
     z-index: 1001;
-    display: none; /* 默认隐藏，JS会控制显示 */
+   /* display: none; 默认隐藏，JS会控制显示 */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -923,3 +923,11 @@ div.highlighter-rouge {
     border-radius: 2px;
     transition: all 0.3s ease;
 }
+
+/* 当屏幕宽度大于 1024px（普通电脑屏幕）时，隐藏该按钮 */
+@media (min-width: 1025px) {
+    .toc-toggle-btn {
+        display: none;
+    }
+}
+
