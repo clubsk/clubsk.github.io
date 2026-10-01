@@ -1,18 +1,134 @@
 ---
 layout: default
-title: 博客
+title: 博客归档
 ---
 
-<!-- 博客列表容器 -->
-<div class="card-grid">
-  {% for post in site.posts %}
-    <div class="card-item">
-      <a href="{{ post.url }}" class="card-link">
-        <h3 class="card-title">{{ post.title }}</h3>
-        <div class="card-meta">
-          <span class="card-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        </div>
-      </a>
-    </div>
+<style>
+  .archive-page {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .archive-intro {
+    margin-bottom: 28px;
+  }
+
+  .archive-intro h2 {
+    margin-bottom: 8px;
+  }
+
+  .archive-count {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .archive-year {
+    margin: 34px 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f1f1f1;
+    color: var(--text);
+    font-size: 1.6rem;
+  }
+
+  .archive-month {
+    margin: 22px 0 10px;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+  .archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .archive-item {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e5e7eb;
+  }
+
+  .archive-date {
+    flex: 0 0 84px;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .archive-link {
+    flex: 1;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  .archive-link:hover {
+    color: #2a9d8f;
+  }
+
+  .archive-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .archive-tag {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 720px) {
+    .archive-item {
+      display: block;
+    }
+
+    .archive-date {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .archive-tags {
+      margin-top: 6px;
+    }
+  }
+</style>
+
+<div class="archive-page">
+  <div class="archive-intro">
+    <h2>博客归档</h2>
+    <p>按时间浏览我的学习记录、技术笔记和日常随笔。</p>
+    <div class="archive-count">共 {{ site.posts.size }} 篇文章</div>
+  </div>
+
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {% for year in posts_by_year %}
+    <section class="archive-year-group">
+      <h3 class="archive-year">{{ year.name }} 年</h3>
+      {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%m'" %}
+      {% for month in posts_by_month %}
+        <h4 class="archive-month">{{ month.name }} 月 · {{ month.items.size }} 篇</h4>
+        <ul class="archive-list">
+          {% for post in month.items %}
+            <li class="archive-item">
+              <time class="archive-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d" }}</time>
+              <a class="archive-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              {% if post.tags %}
+                <div class="archive-tags">
+                  {% for tag in post.tags limit:3 %}
+                    <span class="archive-tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </section>
   {% endfor %}
 </div>
