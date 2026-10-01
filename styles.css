@@ -874,3 +874,20 @@ th {
     padding: 2px 6px;
   }
 }
+
+/* ========================
+   强制美化代码块样式
+   ======================== */
+div.highlighter-rouge {
+  background-color: #282c34 !important; /* 强制极客深灰背景 */
+  border: 1px solid #4b5364 !important; /* 强制加边框 */
+  border-radius: 8px !important; /* 强制圆角 */
+  padding: 15px 20px !important; /* 强制内边距 */
+  margin: 25px 0 !important; /* 上下留白 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; /* 阴影让它浮起来 */
+  color: #abb2bf !important; /* 文字颜色 */
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
