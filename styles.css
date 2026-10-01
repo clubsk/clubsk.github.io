@@ -929,5 +929,14 @@ div.highlighter-rouge {
     .toc-toggle-btn {
         display: none;
     }
+
+  /* 让行内代码颜色和代码块保持一致 */
+code {
+  background-color: #282c34 !important; /* 背景和代码块一样 */
+  color: #abb2bf !important; /* 文字颜色和代码块一样 */
+  padding: 2px 4px; /* 给行内代码一点呼吸空间 */
+  border-radius: 4px; /* 稍微加一点点圆角，更美观 */
+  font-family: 'Consolas', 'Monaco', monospace; /* 字体也保持一致 */
 }
+
 
