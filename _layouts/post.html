@@ -323,54 +323,53 @@ layout: default
 
   </main>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Build TOC from headings
-    try {
-      var body = document.querySelector('.post-content');
-      if (!body) return;
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 1. 智能查找文章正文区域 (兼容多种常见的类名)
+    var postBody = document.querySelector('.post-content') || 
+                   document.querySelector('.post-body') || 
+                   document.querySelector('.markdown') ||
+                   document.querySelector('article');
+    
+    // 如果找不到正文区域，或者找不到目录容器，直接退出
+    var tocContainer = document.querySelector('.post-toc');
+    if (!postBody || !tocContainer) return;
 
-      var headings = body.querySelectorAll('h2, h3, h4');
-      if (!headings || headings.length === 0) {
-        document.getElementById('markdown-toc').innerHTML = '<p class="muted">本文暂无目录</p>';
-        return;
-      }
+    // 2. 获取所有 h2, h3, h4 标题
+    var headings = postBody.querySelectorAll('h2, h3, h4');
+    
+    // 如果没有标题，直接退出
+    if (headings.length === 0) return;
 
-      var ul = document.createElement('ul');
-      ul.className = 'toc-list';
+    // 3. 构建目录 HTML
+    var tocHTML = '<ul style="list-style: none; padding-left: 0; margin: 0;">';
+    
+    headings.forEach(function(heading) {
+      // 获取标题文字
+      var text = heading.textContent;
+      // 去掉特殊字符，生成锚点 ID
+      var id = text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-');
+      
+      // 给网页上的标题加上 id，方便跳转
+      heading.id = id;
+      
+      // 根据标题层级（h2/h3/h4）决定缩进
+      var paddingLeft = 0;
+      if (heading.tagName === 'H3') paddingLeft = 15;
+      if (heading.tagName === 'H4') paddingLeft = 30;
 
-      headings.forEach(function (h) {
-        if (!h.id) {
-          var base = h.textContent.trim().toLowerCase().replace(/[^\w\-\u4e00-\u9fa5\s]/g, '').replace(/\s+/g, '-');
-          var id = base || 'heading';
-          var uniq = id;
-          var i = 1;
-          while (document.getElementById(uniq)) { uniq = id + '-' + i; i++; }
-          h.id = uniq;
-        }
+      // 拼接列表项
+      tocHTML += '<li style="margin-bottom: 8px; padding-left: ' + paddingLeft + 'px;">';
+      tocHTML += '<a href="#' + id + '" style="text-decoration: none; color: #555; font-size: 14px;">' + text + '</a>';
+      tocHTML += '</li>';
+    });
 
-        var li = document.createElement('li');
-        li.className = 'toc-' + h.tagName.toLowerCase();
-        var a = document.createElement('a');
-        a.href = '#' + h.id;
-        a.textContent = h.textContent;
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var target = document.getElementById(h.id);
-          if (!target) return;
-          var offset = 20;
-          var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-          history.replaceState ? history.replaceState(null, null, '#' + h.id) : (location.hash = '#' + h.id);
-        });
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-
-      document.getElementById('markdown-toc').appendChild(ul);
-    } catch (err) {
-      console.warn('TOC build failed', err);
-    }
+    tocHTML += '</ul>';
+    
+    // 4. 把生成的目录放进右边的容器里
+    tocContainer.innerHTML = '<div style="margin-bottom: 10px; font-weight: bold;">目录</div>' + tocHTML;
+  });
+</script>
 
     // 小屏目录开关逻辑
     var tocToggleBtn = document.getElementById('toc-toggle-btn');
