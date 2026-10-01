@@ -91,9 +91,126 @@ layout: default
     font-size: 1.2em;
   }
 
+  /* 小屏目录按钮样式 */
+  .toc-toggle-btn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-solid);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(16,24,40,0.2);
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .toc-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(16,24,40,0.3);
+  }
+
+  .toc-toggle-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* 侧边栏目录容器 */
+  .toc-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -4px 0 12px rgba(16,24,40,0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+    animation: slideIn 0.3s ease;
+  }
+
+  .toc-sidebar.active {
+    display: block;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .toc-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .toc-close-btn:hover {
+    transform: rotate(90deg);
+  }
+
+  .toc-sidebar .toc-title {
+    margin-top: 30px;
+    font-size: 0.95rem;
+  }
+
+  .toc-sidebar .toc-list {
+    font-size: 0.9rem;
+  }
+
+  .toc-sidebar .toc-list li a {
+    color: var(--text);
+    padding: 6px 0;
+    display: block;
+  }
+
+  .toc-sidebar .toc-list li a:hover {
+    color: var(--accent-solid);
+  }
+
+  /* 遮罩层 */
+  .toc-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+
+  .toc-overlay.active {
+    display: block;
+  }
+
   @media (max-width: 920px) {
     .post { display: block; }
-    .post-toc { position: relative; top: auto; max-height: none; margin-top: 18px; }
+    .post-toc { display: none; }
+    .toc-toggle-btn { display: flex; }
   }
 
   @media (max-width: 720px) {
@@ -113,10 +230,34 @@ layout: default
       min-width: 140px;
       justify-content: center;
     }
+
+    .toc-sidebar {
+      width: 260px;
+    }
+
+    .toc-toggle-btn {
+      bottom: 20px;
+      right: 16px;
+    }
   }
   </style>
 </head>
 <body>
+  <!-- 遮罩层 -->
+  <div class="toc-overlay" id="toc-overlay"></div>
+
+  <!-- 侧边栏目录 -->
+  <aside class="toc-sidebar" id="toc-sidebar" aria-label="文章目录">
+    <button class="toc-close-btn" id="toc-close-btn" title="关闭目录">×</button>
+    <div class="toc-title">目录</div>
+    <div id="markdown-toc">
+      <!-- JS will build the TOC here from headings in .post-body -->
+    </div>
+  </aside>
+
+  <!-- 目录开关按钮 -->
+  <button class="toc-toggle-btn" id="toc-toggle-btn" title="打开目录">📋</button>
+
   <main id="main" class="content post" role="main">
     <article class="post-article">
       <header class="post-header">
@@ -155,9 +296,9 @@ layout: default
     </article>
 
     {% if page.toc %}
-    <aside class="post-toc" aria-label="文章目录">
+    <aside class="post-toc" aria-label="文章目录" style="display: none;">
       <div class="toc-title">目录</div>
-      <div id="markdown-toc">
+      <div id="markdown-toc-desktop">
         <!-- JS will build the TOC here from headings in .post-body -->
       </div>
     </aside>
@@ -166,17 +307,15 @@ layout: default
   </main>
 
   <script>
-  // Build a TOC by scanning headings inside .post-body
   document.addEventListener('DOMContentLoaded', function () {
+    // Build TOC from headings
     try {
       var body = document.querySelector('.post-body');
-      var tocRoot = document.getElementById('markdown-toc');
-      if (!body || !tocRoot) return;
+      if (!body) return;
 
-      // Select headings to include in TOC
       var headings = body.querySelectorAll('h2, h3, h4');
       if (!headings || headings.length === 0) {
-        tocRoot.innerHTML = '<p class="muted">本文暂无目录</p>';
+        document.getElementById('markdown-toc').innerHTML = '<p class="muted">本文暂无目录</p>';
         return;
       }
 
@@ -184,7 +323,6 @@ layout: default
       ul.className = 'toc-list';
 
       headings.forEach(function (h) {
-        // Ensure heading has an id
         if (!h.id) {
           var base = h.textContent.trim().toLowerCase().replace(/[^\w\-\u4e00-\u9fa5\s]/g, '').replace(/\s+/g, '-');
           var id = base || 'heading';
@@ -200,11 +338,10 @@ layout: default
         a.href = '#' + h.id;
         a.textContent = h.textContent;
         a.addEventListener('click', function (e) {
-          // smooth scroll
           e.preventDefault();
           var target = document.getElementById(h.id);
           if (!target) return;
-          var offset = 20; // small offset
+          var offset = 20;
           var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
           window.scrollTo({ top: top, behavior: 'smooth' });
           history.replaceState ? history.replaceState(null, null, '#' + h.id) : (location.hash = '#' + h.id);
@@ -213,11 +350,39 @@ layout: default
         ul.appendChild(li);
       });
 
-      tocRoot.appendChild(ul);
+      document.getElementById('markdown-toc').appendChild(ul);
     } catch (err) {
-      // fail silently
       console.warn('TOC build failed', err);
     }
+
+    // 小屏目录开关逻辑
+    var tocToggleBtn = document.getElementById('toc-toggle-btn');
+    var tocSidebar = document.getElementById('toc-sidebar');
+    var tocOverlay = document.getElementById('toc-overlay');
+    var tocCloseBtn = document.getElementById('toc-close-btn');
+
+    function openToc() {
+      tocSidebar.classList.add('active');
+      tocOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeToc() {
+      tocSidebar.classList.remove('active');
+      tocOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    tocToggleBtn.addEventListener('click', openToc);
+    tocCloseBtn.addEventListener('click', closeToc);
+    tocOverlay.addEventListener('click', closeToc);
+
+    // 点击目录链接后自动关闭
+    document.getElementById('markdown-toc').addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        setTimeout(closeToc, 300);
+      }
+    });
   });
   </script>
 </body>
