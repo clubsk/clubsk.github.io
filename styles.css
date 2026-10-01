@@ -69,9 +69,19 @@ section:hover{
   border-left-color:rgba(16,24,40,0.04);
 }
 
-/* 代码块与展示 */
-.code{background:#f8f9fb;padding:10px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace}
-.muted{color:var(--muted)}
+
+.code {
+  background: #282c34; /* 经典极客暗色背景 */
+  padding: 18px 20px;
+  border-radius: 8px;
+  border: 1px solid #4b5364; /* 边框颜色与背景协调 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 14px;
+  color: #abb2bf; /* 柔和的灰白文字，长时间看也不刺眼 */
+  overflow-x: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一点阴影，让它“浮”起来 */
+}
+
 
 /* 博客列表风格 */
 .post-list{list-style:none;padding:0;margin:0}
