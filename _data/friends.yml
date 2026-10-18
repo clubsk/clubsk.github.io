@@ -2,17 +2,17 @@
   url:  https://www.runoob.com
   desc: 查语法用
 
-- name: 树上的乌龟
+- name: Kwansh
   url:  https://3a0.top/
-  desc: 学长
+  desc: 牢大的博客
 
 - name: vg101
   url:  https://wiki.virtualguard101.com/obsidian/Tools/linux/Linux%E5%9F%BA%E7%A1%80%E3%80%81%E6%9D%82%E9%A1%B9/
-  desc: linux基础，also学长
+  desc: 一位学长的维基
 
 - name: NSSCTF
   url :  https://www.nssctf.cn/index
-  desc: 做题用
+  desc: 打打
 
 - name: ctf wiki
   url :  https://ctf-wiki.org/
