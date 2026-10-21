@@ -940,4 +940,22 @@ code {
   font-family: 'Consolas', 'Monaco', monospace; /* 字体也保持一致 */
 }
 
+  /* 表格：不超出内容区，过宽时横向滚动 */
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+}
+
+/* 单元格内文字过长时折行，避免单列撑爆 */
+table th,
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
 
