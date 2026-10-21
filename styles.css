@@ -888,6 +888,7 @@ div.highlighter-rouge {
   color: #abb2bf !important; /* 文字颜色 */
   font-family: 'Consolas', 'Monaco', monospace;
   font-size: 14px;
+  width: 100%
   overflow-x: auto;
 }
 
