@@ -958,4 +958,8 @@ table td {
   white-space: normal;
 }
 
+.post-content {
+  overflow-wrap: break-word;
+}  
+
 
