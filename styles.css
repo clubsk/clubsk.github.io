@@ -950,7 +950,7 @@ div.highlight pre, pre.highlight {
     border-radius: 0 !important;
     padding: 0 !important;              /* 去除内层默认 padding */
     margin: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
 }
 
 /* 4. 内部代码文字 */
@@ -960,6 +960,8 @@ div.highlight pre code, pre.highlight code {
     padding: 0 !important;
     font-family: Consolas, Monaco, monospace !important;
     font-size: 14px !important;
+    white-space: pre-wrap !important; /* 核心：让长文本和代码强制换行 */
+    word-break: break-all !important; /* 核心：遇到超长字符串直接从中间切断换行 */
     line-height: 1.7 !important;
 }
 
