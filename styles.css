@@ -1,8 +1,8 @@
 /* styles.css — 纯白主题（简洁 / 极简 / 纯白风格）*/
 :root{
-  --bg: #ffffff;
+  --bg: #faf8f4;
   --card: #ffffff;
-  --text: #0f1724; /* 深色主文本 */
+  --text: #2c2c2c; /* 深色主文本 */
   --muted: #6b7280; /* 次要文本 */
   --radius: 12px;
 
