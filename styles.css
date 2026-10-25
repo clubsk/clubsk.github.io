@@ -964,4 +964,17 @@ table td {
   overflow-wrap: break-word;
 }  
 
+/* 解决代码块撑爆问题，优先级最高 */
+.highlighter-rouge pre {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  margin: 0 !important;
+  padding: 15px 20px !important;
+  box-sizing: border-box !important;
+}
+  
+  
+  
+
 
