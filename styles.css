@@ -1,7 +1,7 @@
 /* styles.css — 纯白主题（简洁 / 极简 / 纯白风格）*/
 :root{
   --bg: #faf8f4;
-  --card: #ffffff;
+  --card: #faf8f4;
   --text: #2c2c2c; /* 深色主文本 */
   --muted: #6b7280; /* 次要文本 */
   --radius: 12px;
@@ -56,7 +56,7 @@ article h1, .post-title, .article-title {
 
 /* 卡片：白色 + 轻微阴影 */
 section{
-  background: var(--card);
+  background: var(--bg);
   padding:22px;border-radius:var(--radius);
   margin-bottom:18px;
   box-shadow: 0 6px 18px rgba(16,24,40,0.04);
