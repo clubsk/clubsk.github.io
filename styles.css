@@ -70,18 +70,6 @@ section:hover{
 }
 
 
-.code {
-  background: #282c34; /* 经典极客暗色背景 */
-  padding: 18px 20px;
-  border-radius: 8px;
-  border: 1px solid #4b5364; /* 边框颜色与背景协调 */
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-  font-size: 14px;
-  color: #abb2bf; /* 柔和的灰白文字，长时间看也不刺眼 */
-  overflow-x: auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一点阴影，让它“浮”起来 */
-}
-
 
 /* 博客列表风格 */
 .post-list{list-style:none;padding:0;margin:0}
@@ -191,14 +179,7 @@ li > ul {
     margin-bottom: 0.5em !important;
 }
 
-/* 4. 代码块样式（解决内部文字向右偏、不整齐的问题） */
-pre, code {
-  padding-left: 0.2em !important; /* 将左内边距缩减到极小，让代码文字完全顶格对齐 */
-}
 
-.highlight pre {
-  overflow-x: auto !important; /* 如果代码太长，允许左右滑动，防止溢出 */
-}
 
 /* ========== 霞鹜文楷字体设置 ========== */
 
@@ -875,24 +856,7 @@ th {
   }
 }
 
-/* ========================
-   强制美化代码块样式
-   ======================== */
-div.highlighter-rouge {
-  background-color: #ffffff !important; /* 强制极客深灰背景 */
-  border: 1px solid #e5e5e5 !important; /* 强制加边框 */
-  border-radius: 8px !important; /* 强制圆角 */
-  padding: 15px 20px !important; /* 强制内边距 */
-  margin: 25px 0 !important; /* 上下留白 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important; /* 阴影让它浮起来 */
-  color: #abb2bf !important; /* 文字颜色 */
-  font-family: 'Consolas', 'Monaco', monospace;
-  font-size: 14px;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: pre
-}
+
 
 /* 手机端悬浮目录按钮（改为汉堡菜单） */
 .toc-toggle-btn {
@@ -933,14 +897,6 @@ div.highlighter-rouge {
         display: none;
     }
 
-  /* 让行内代码颜色和代码块保持一致 */
-code {
-  background-color: #f0f0f0 !important; /* 背景和代码块一样 */
-  color: #000000 !important; /* 文字颜色和代码块一样 */
-  padding: 2px 4px; /* 给行内代码一点呼吸空间 */
-  border-radius: 4px; /* 稍微加一点点圆角，更美观 */
-  font-family: 'Consolas', 'Monaco', monospace; /* 字体也保持一致 */
-}
 
   /* 表格：不超出内容区，过宽时横向滚动 */
 table {
@@ -962,18 +918,52 @@ table td {
 
 .post-content {
   overflow-wrap: break-word;
-}  
-
-/* 解决代码块撑爆问题，优先级最高 */
-.highlighter-rouge pre {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  margin: 0 !important;
-  padding: 15px 20px !important;
-  box-sizing: border-box !important;
 }
   
+/* ===== 全新重写的代码块样式 ===== */
+
+/* 1. 大代码块（限制大小与防溢出） */
+div.highlight, pre.highlight {
+    background-color: #e8e4d9 !important; /* 复古深米色背景 */
+    color: #333333 !important;            /* 深灰色文字，清晰易读 */
+    border-radius: 10px !important;       /* 平滑的圆角 */
+    padding: 15px 20px !important;        /* 内部留白 */
+    margin: 20px 0 !important;            /* 与段落保持距离 */
+    
+    /* 核心防溢出代码（限制大小，绝不超出容器） */
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;          /* 内容超宽时，自动在底部出现横向滚动条 */
+    overflow-y: hidden !important;        /* 隐藏纵向溢出 */
+    
+    box-sizing: border-box !important;    /* 防止 padding 撑破容器大小 */
+    border: 1px solid rgba(0,0,0,0.06) !important; /* 极淡的边框增加质感 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; /* 淡淡的投影 */
+    font-size: 14px !important;           /* 合适的字体大小 */
+    line-height: 1.6 !important;          /* 舒适的行高 */
+}
+
+/* 2. 代码块里的代码字体微调 */
+div.highlight code, pre.highlight code {
+    background-color: transparent !important; /* 去除原本的背景色 */
+    color: inherit !important;                /* 继承父元素的文字颜色 */
+    font-family: Consolas, Monaco, 'Courier New', monospace !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* 3. 正文里的行内代码（短代码片段） */
+code {
+    background-color: #e8e4d9 !important; /* 同样使用复古米色，风格统一 */
+    color: #333333 !important;            /* 深灰色文字 */
+    padding: 2px 5px !important;          /* 呼吸空间 */
+    border-radius: 4px !important;        /* 微微的圆角 */
+    font-size: 0.9em !important;          /* 比正文字号稍小，更精致 */
+    font-family: Consolas, Monaco, 'Courier New', monospace !important;
+}
+
+
   
   
 
