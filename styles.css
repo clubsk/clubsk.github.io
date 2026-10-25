@@ -888,8 +888,10 @@ div.highlighter-rouge {
   color: #abb2bf !important; /* 文字颜色 */
   font-family: 'Consolas', 'Monaco', monospace;
   font-size: 14px;
-  width: 100%
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  white-space: pre
 }
 
 /* 手机端悬浮目录按钮（改为汉堡菜单） */
