@@ -24,7 +24,7 @@ body{
 
 /* 头部：纯白、低阴影 */
 .site-header{
-  background:var(--card);
+  background:var(--bg);
   color:var(--text);
   padding:48px 16px;
   text-align:center;
