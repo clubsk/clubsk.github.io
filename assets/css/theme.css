@@ -1,1 +1,61 @@
+/* ====== 1. 全局防溢出设置 (最重要！) ====== */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* 强制让文章内容和所有容器都不能超出屏幕宽度 */
+article, .container, .post-content, div.highlight, pre {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ====== 2. 代码块专属样式 ====== */
+/* 让代码块变成卡片，并且可以左右滑动，不会撑破页面 */
+div.highlight {
+    width: 100%;
+    overflow-x: auto; /* 超出宽度时只显示横向滚动条 */
+    overflow-y: hidden;
+    background: #f6f6f6; /* 浅色背景 */
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+}
+
+/* 深色模式下自动适配 */
+@media (prefers-color-scheme: dark) {
+    div.highlight {
+        background: #1e1e1e;
+        border-color: #333;
+        color: #ddd;
+    }
+}
+
+/* 控制代码本身的排版 */
+div.highlight pre {
+    margin: 0;
+    padding: 0;
+}
+
+div.highlight pre code {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre; /* 保持代码不换行 */
+}
+
+/* 行内的小代码（比如这段里的代码） */
+p code, li code {
+    background: #f3f3f3;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+@media (prefers-color-scheme: dark) {
+    p code, li code {
+        background: #333;
+        color: #ddd;
+    }
+}
 
