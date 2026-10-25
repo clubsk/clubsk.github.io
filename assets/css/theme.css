@@ -1,61 +1,46 @@
-/* ====== 1. 全局防溢出设置 (最重要！) ====== */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
+/* =========================================
+   1. 页面最外层绝对防撑爆 
+   ========================================= */
+html, body, .post-content, .post_body, article {
+  max-width: 100vw !important; /* 绝对不允许超过屏幕宽度 */
+  overflow-x: hidden !important; /* 隐藏横向滚动条 */
 }
 
-/* 强制让文章内容和所有容器都不能超出屏幕宽度 */
-article, .container, .post-content, div.highlight, pre {
-    max-width: 100%;
-    box-sizing: border-box;
+/* =========================================
+   2. 针对 Jekyll 代码块底层结构 (highlighter-rouge)
+   ========================================= */
+.highlighter-rouge, .language-plaintext {
+  max-width: 100% !important;
+  overflow-x: auto !important; /* 允许左右滑动 */
+  margin: 20px 0 !important;
+  box-sizing: border-box !important;
 }
 
-/* ====== 2. 代码块专属样式 ====== */
-/* 让代码块变成卡片，并且可以左右滑动，不会撑破页面 */
-div.highlight {
-    width: 100%;
-    overflow-x: auto; /* 超出宽度时只显示横向滚动条 */
-    overflow-y: hidden;
-    background: #f6f6f6; /* 浅色背景 */
-    border: 1px solid #e2e2e2;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 20px 0;
+.highlighter-rouge .highlight, 
+.highlighter-rouge pre.highlight {
+  margin: 0 !important;
+  padding: 15px 10px !important;
+  border-radius: 8px !important;
+  background-color: #f8f9fa !important; /* 卡片背景色（浅色模式） */
+  border: 1px solid #eee !important;
 }
 
-/* 深色模式下自动适配 */
+.highlighter-rouge code {
+  word-break: break-all !important; /* 长字符串强制换行 */
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* =========================================
+   3. 深色模式兼容
+   ========================================= */
 @media (prefers-color-scheme: dark) {
-    div.highlight {
-        background: #1e1e1e;
-        border-color: #333;
-        color: #ddd;
-    }
+  .highlighter-rouge .highlight, 
+  .highlighter-rouge pre.highlight {
+    background-color: #222 !important; /* 深色卡片背景 */
+    border-color: #333 !important;
+    color: #e5e5e5 !important;
+  }
 }
 
-/* 控制代码本身的排版 */
-div.highlight pre {
-    margin: 0;
-    padding: 0;
-}
-
-div.highlight pre code {
-    font-family: "JetBrains Mono", Consolas, monospace;
-    font-size: 14px;
-    line-height: 1.6;
-    white-space: pre; /* 保持代码不换行 */
-}
-
-/* 行内的小代码（比如这段里的代码） */
-p code, li code {
-    background: #f3f3f3;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.9em;
-}
-@media (prefers-color-scheme: dark) {
-    p code, li code {
-        background: #333;
-        color: #ddd;
-    }
-}
 
